@@ -10,10 +10,12 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  WebView
 } from 'react-native';
 
 import Swiper from "react-native-deck-swiper";
+
 import {connect} from 'react-redux';
 
 class ArticleScreen extends Component {
@@ -38,25 +40,29 @@ class ArticleScreen extends Component {
   render() {
 
     const {article} = this.props;
-        let title = article.title;
-        let image = article.img;
-        let content = article.content;
-        if(!content){
-          title = data.title;
-          image = data.image;
-          content = data.content;
-        }
+    const arr = [];
+    console.log(this.props);
+    // let arrCard = article.map(p => {
+    //     arr.push([p.url]);
+    // });
+    // if(!arr.length) arr.push(['Nothing', 'None']);
+
 
 
     return (
       <View style={styles.container}>
           <Swiper
-              cards={[['title1','content1'], ['title2','content2'], ['title3','content3']]}
+              cards={arr}
               renderCard={(card) => {
                   return (
                       <View style={styles.card}>
-                          <Text style={styles.title}>{card[0]}</Text>
-                          <Text style={styles.title}>{card[1]}</Text>
+                        <WebView
+                        source={{uri: 'https://stackoverflow.com/questions/9484474/json-parse-to-array'}}
+                        style={{marginTop: 10}}
+                        contentInset = {{top: 0, left: 0, bottom: 0, right: 0}}
+                        scrollEnabled = 'false'
+                        />
+
                       </View>
                   )
               }}

@@ -208,7 +208,7 @@ export function listPosts(HomeTime = 0, user_id) {
     console.log(`Making GET request to: ${url}`);
 
     return fetch(url).then((res) => {
-      console.log(res);
+
         if (res.status !== 200)
             throw new Error(`Unexpected response code: ${res.status}`);
         return res.json().then((res) => {
@@ -306,13 +306,31 @@ export function getVideo(genre){
 }
 
 export function getArticle(){
-  let url = `${postBaseUrl}/article`;
-  console.log(`Making GET request to: ${url}`);
-  return fetch(url).then(function(res) {
-      if (res.status !== 200)
-          throw new Error(`Unexpected response code: ${res.status}`);
-      return res.data;
-  });
+  // let url = `${postBaseUrl}/article`;
+  // console.log(`Making GET request to: ${url}`);
+  // return fetch(url).then(function(res) {
+  //     if (res.status !== 200)
+  //         throw new Error(`Unexpected response code: ${res.status}`);
+  //     return res.json().then((res) => {
+  //         return res;
+  //     });
+  // });
+  var apiurl = "https://newsapi.org/v1/articles?source=bloomberg&sortBy=top&apiKey=3c3a223500604f3290dcca847589aed2";
+
+    return fetch(apiurl, {
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).then(res => {
+        if (res.status !== 200)
+            throw new Error(`Unexpected response code: ${res.status}`);
+            return res.json().then((res) => {
+              return res.articles;
+            });
+
+    });
+
+
 }
 
 export function sentMusicPrefer(prefer, user_id){

@@ -44,6 +44,17 @@ class MyStuffScreen extends Component {
     const { goBack } = this.props.navigation;
     goBack();
   }
+  handle_time_button_click(time, id){
+  this.props.dispatch(setMystuffButtonColor(time));
+  this.props.dispatch(resetTime(id, time));
+  this.props.dispatch(setMystuffButtonColor(0));
+  this.props.dispatch(setHomeTime(0));
+}
+handle_done_button_click(id){
+  this.props.dispatch(donePost(id));
+  this.props.dispatch(setHomeTime(0));
+  this.props.dispatch(plusMusicStage());
+}
 
   componentWillMount() {
         this.props.dispatch(listPosts(0));
@@ -54,11 +65,13 @@ class MyStuffScreen extends Component {
     const { goBack } = this.props.navigation;
     const {posts, HomeTime, Mystuff_button_color, post_number} = this.props;
     const arr = [];
+    console.log(this.props)
     let arrCard = posts.map(p => {
       if(p.time == HomeTime)
-        arr.push([p.text, p.deadline]);
+        arr.push([p.text, p.deadline, p.id]);
     })
-    console.log(arr.length);
+    if(!arr.length) arr.push(['Nothing', 'None']);
+
     return (
       <View style={styles.container}>
 
@@ -77,31 +90,41 @@ class MyStuffScreen extends Component {
                         <View style = {styles.timeView}>
                           <Text style = {styles.notYet}>not yet, I still need... </Text>
                           <View style = {styles.minuteButtonView}>
-                            <TouchableOpacity style = {styles.minutesButton}>
+                            <TouchableOpacity
+                              onPress = {() => this.handle_time_button_click(5,card[2])}
+                              style = {styles.minutesButton}>
                               <View style = {styles.circle}>
                                 <Text style = {styles.minuteText}>5</Text>
                               </View>
                             </TouchableOpacity>
 
-                            <TouchableOpacity style = {styles.minutesButton}>
+                            <TouchableOpacity
+                              onPress = {() => this.handle_time_button_click(10,card[2])}
+                              style = {styles.minutesButton}>
                               <View style = {styles.circle}>
                                 <Text style = {styles.minuteText}>10</Text>
                               </View>
                             </TouchableOpacity>
 
-                            <TouchableOpacity style = {styles.minutesButton}>
+                            <TouchableOpacity
+                              onPress = {() => this.handle_time_button_click(15,card[2])}
+                              style = {styles.minutesButton}>
                               <View style = {styles.circle}>
                                 <Text style = {styles.minuteText}>15</Text>
                               </View>
                             </TouchableOpacity>
 
-                            <TouchableOpacity style = {styles.minutesButton}>
+                            <TouchableOpacity
+                              onPress = {() => this.handle_time_button_click(20,card[2])}
+                              style = {styles.minutesButton}>
                               <View style = {styles.circle}>
                                 <Text style = {styles.minuteText}>20</Text>
                               </View>
                             </TouchableOpacity>
 
-                            <TouchableOpacity style = {styles.minutesButton}>
+                            <TouchableOpacity
+                              onPress = {() => this.handle_time_button_click(25,card[2])}
+                              style = {styles.minutesButton}>
                               <View style = {styles.circle}>
                                 <Text style = {styles.minuteText}>25</Text>
                               </View>
@@ -109,7 +132,9 @@ class MyStuffScreen extends Component {
 
                           </View>
                         </View>
-                        <TouchableOpacity style = {styles.doneView}>
+                        <TouchableOpacity
+                          onPress = {() => this.handle_done_button_click(card[2])}
+                          style = {styles.doneView}>
 
                             <Text style = {styles.doneText}>
                               DONE
@@ -127,7 +152,7 @@ class MyStuffScreen extends Component {
               disableTopSwipe='true'
               >
           </Swiper>
-        
+
           {
             this.state.swipedAllCards?
               <View style = {styles.noCard}>

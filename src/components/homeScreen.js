@@ -62,10 +62,9 @@ class HomeScreen extends Component {
  componentWillMount() {
         this.props.dispatch(listPosts(0));
         this.props.dispatch(setHomeTime(0));
-        // this.props.dispatch(getArticle());
+        this.props.dispatch(getArticle());
         this.props.dispatch(getVideo('nba'));
-        // this.props.dispatch(set_video_genres_state_from_api()); //
-        // this.props.dispatch(set_music_prefer_state_from_api());
+
     }
 
 
