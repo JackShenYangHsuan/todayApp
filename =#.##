@@ -1,0 +1,10 @@
+todayApp@0.0.1 /Users/jack/Desktop/todayApp
+├── moment@2.18.1 
+├── UNMET PEER DEPENDENCY react@15.6.1
+├── react-addons-shallow-compare@15.6.0 
+├── react-dates@12.1.2 
+├── react-dom@15.6.1 
+├── UNMET PEER DEPENDENCY react-native@0.45.1
+└─┬ react-native-snap-carousel@2.3.0
+  └── react-addons-shallow-compare@15.5.2 
+
