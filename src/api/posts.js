@@ -156,7 +156,7 @@ import {
   AsyncStorage
 } from 'react-native';
 // Develop server URL
-const postBaseUrl = 'http://localhost:8083/api';
+const postBaseUrl = 'http://localhost:8087/api';
 
 // Staging server URL
 // const postBaseUrl = 'http://weathermood-staging.us-west-2.elasticbeanstalk.com/api';
@@ -207,11 +207,13 @@ export function listPosts(HomeTime = 0, user_id) {
 
     console.log(`Making GET request to: ${url}`);
 
-    return fetch(url).then(function(res) {
+    return fetch(url).then((res) => {
+      console.log(res);
         if (res.status !== 200)
             throw new Error(`Unexpected response code: ${res.status}`);
-
-        return res.data;
+        return res.json().then((res) => {
+          return res;
+        });
     });
 }
 
@@ -220,17 +222,21 @@ export function createPost(place, deadline, time, input, has_deadline, user_id )
 
     console.log(`Making POST request to: ${url}`);
 
-    return
-    fetch(url, {
-      method: 'POST',
-      header: {Accept: 'application/json',
-            'Content-Type': 'application/json'},
-      body: JSON.stringify([place, deadline, time, input, has_deadline, user_id])
+
+    return fetch(url, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            place, deadline, time, input, has_deadline, user_id
+        })
     }).then(function(res) {
         if (res.status !== 200)
             throw new Error(`Unexpected response code: ${res.status}`);
 
-        return res.data;
+        return res.json();
     });
 }
 

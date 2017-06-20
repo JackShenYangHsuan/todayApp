@@ -18,6 +18,13 @@ import {
 import {connect} from 'react-redux';
 import Swiper from "react-native-deck-swiper";
 import navigationOptions from "react-navigation";
+import {
+  listPosts, setMystuffButtonColor, resetTime,
+  donePost, setMystuffPostNumber, setHomeTime,
+  plusMusicStage
+} from '../states/post-actions.js';
+
+// let arrCard = [];
 
 class MyStuffScreen extends Component {
 
@@ -37,23 +44,31 @@ class MyStuffScreen extends Component {
     const { goBack } = this.props.navigation;
     goBack();
   }
-  static navigationOptions = {
-    title: 'Welcome',
-  };
+
+  componentWillMount() {
+        this.props.dispatch(listPosts(0));
+  }
 
 
   render() {
     const { goBack } = this.props.navigation;
+    const {posts, HomeTime, Mystuff_button_color, post_number} = this.props;
+    const arr = [];
+    let arrCard = posts.map(p => {
+      if(p.time == HomeTime)
+        arr.push([p.text, p.deadline]);
+    })
+    console.log(arr.length);
     return (
       <View style={styles.container}>
-      <Button
-        title="Go back"
-        onPress={() => goBack()}
-      />
-          <Swiper
-              cards={[['Buy milk.','Mar 2'], ['title2','content2'], ['title3','content3']]}
+
+
+      <Swiper
+
+            cards={arr}
               renderCard={(card) => {
                   return (
+
                       <View style={styles.card}>
                         <View style = {styles.stuffView}>
                           <Text style={styles.title}>{card[0]}</Text>
@@ -110,9 +125,9 @@ class MyStuffScreen extends Component {
               backgroundColor={'white'}
               disableBottomSwipe='true'
               disableTopSwipe='true'
-
               >
           </Swiper>
+        
           {
             this.state.swipedAllCards?
               <View style = {styles.noCard}>

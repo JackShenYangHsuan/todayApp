@@ -14,23 +14,82 @@ import {
   Image,
   ScrollView,
   TextInput,
-  Switch
+  Switch,
+  DatePickerIOS,
 } from 'react-native';
 
 import Swiper from "react-native-deck-swiper";
 import {connect} from 'react-redux';
 
+import {
+  createPost, setInputDanger, setTimeDanger, setDeadlineDanger,
+  setPlaceDanger,setInputValue, toggleHasDeadline,
+  setDeadline, setEstimateButtonColor, setDeadlineButtonColor, setClicked,
+  setPlace, setEstimateTime, resetCreate, setLinkText
+} from '../states/post-actions.js';
 
-const month = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 class CreateScreen extends Component {
 
   constructor(props) {
    super(props);
    this.state = {
      falseSwitchIsOn: true,
+     date: new Date()
    };
  }
+
+ onDateChange = (date) => {
+   this.setState({date: date});
+   this.props.dispatch(setDeadline(date.toLocaleDateString('en-US')));
+   this.props.dispatch(setDeadlineDanger("is_false"));
+ };
+
+ handleInputChange = (text) => {
+        this.props.dispatch(setInputValue(text));
+        if (text) {
+            this.props.dispatch(setInputDanger(false));
+        }
+}
+handle_time_button_click = (time) =>{
+      this.props.dispatch(setEstimateButtonColor(time));
+      this.props.dispatch(setEstimateTime(time));
+      this.props.dispatch(setTimeDanger("is_false"));
+
+}
+handle_place_button_click = (place) => {
+    this.props.dispatch(setPlace(place));
+    this.props.dispatch(setPlaceDanger("is_false"));
+    this.props.dispatch(setClicked(place));
+
+  }
+handle_toggle_button_click = ()=> {
+   this.props.dispatch(toggleHasDeadline());
+   console.log(this.props)
+}
+handle_create = () => {
+      if (!this.props.inputValue) {
+          this.props.dispatch(setInputDanger(true));
+          return;
+      }
+      if(this.props.estimate_time == -1){
+        this.props.dispatch(setTimeDanger("is_true"));
+        return;
+      }
+      if (this.props.has_deadline === true  && !this.props.deadline) {
+          this.props.dispatch(setDeadlineDanger("is_true"));
+          return;
+      }
+      if(!this.props.place){
+        this.props.dispatch(setPlaceDanger("is_true"));
+        return;
+      }
+      this.props.dispatch(createPost(this.props.place, this.props.deadline, this.props.estimate_time, this.props.inputValue, this.props.has_deadline, '1'));
+      this.props.dispatch(resetCreate());
+}
+
+
   render() {
+    const {estimate_button_color} = this.props;
     return (
       <ScrollView style = {{backgroundColor:'white'}}>
         <Text style = {styles.title}>Create an Event</Text>
@@ -38,6 +97,9 @@ class CreateScreen extends Component {
           <TextInput
             style = {styles.textInput}
             placeholder="What's on your mind?"
+            value={this.props.inputValue} // controlled component
+            onChangeText={text => this.handleInputChange(text)}
+            returnKeyType = 'done'
           />
 
         </View>
@@ -45,31 +107,43 @@ class CreateScreen extends Component {
         <View style = {styles.timeView}>
           <Text style = {styles.subTitle0}>Estimated time</Text>
           <View style = {styles.minuteButtonView}>
-            <TouchableOpacity style = {styles.minutesButton}>
+            <TouchableOpacity
+              onPress = {() => this.handle_time_button_click(5)}
+              style = {styles.minutesButton}
+
+              >
               <View style = {styles.circle}>
                 <Text style = {styles.minuteText}>5</Text>
               </View>
             </TouchableOpacity>
 
-            <TouchableOpacity style = {styles.minutesButton}>
+            <TouchableOpacity
+              onPress = {() => this.handle_time_button_click(10)}
+              style = {styles.minutesButton}>
               <View style = {styles.circle}>
                 <Text style = {styles.minuteText}>10</Text>
               </View>
             </TouchableOpacity>
 
-            <TouchableOpacity style = {styles.minutesButton}>
+            <TouchableOpacity
+              onPress = {() => this.handle_time_button_click(15)}
+              style = {styles.minutesButton}>
               <View style = {styles.circle}>
                 <Text style = {styles.minuteText}>15</Text>
               </View>
             </TouchableOpacity>
 
-            <TouchableOpacity style = {styles.minutesButton}>
+            <TouchableOpacity
+              onPress = {() => this.handle_time_button_click(20)}
+              style = {styles.minutesButton}>
               <View style = {styles.circle}>
                 <Text style = {styles.minuteText}>20</Text>
               </View>
             </TouchableOpacity>
 
-            <TouchableOpacity style = {styles.minutesButton}>
+            <TouchableOpacity
+              onPress = {() => this.handle_time_button_click(25)}
+              style = {styles.minutesButton}>
               <View style = {styles.circle}>
                 <Text style = {styles.minuteText}>25</Text>
               </View>
@@ -81,33 +155,45 @@ class CreateScreen extends Component {
         <View style = {styles.deadlineView}>
             <Text style = {styles.subTitle}>Deadline</Text>
             <Switch
-              onValueChange={(value) => this.setState({falseSwitchIsOn: value})}
-              value={this.state.falseSwitchIsOn}
+              onValueChange={this.handle_toggle_button_click}
+              value={this.props.has_deadline}
               onTintColor="#FD4D3A"
               style = {styles.deadlineSwitch}
             ></Switch>
-
+            {this.state.falseSwitchIsOn &&
+            <DatePickerIOS
+              date={this.state.date}
+              mode="date"
+              onDateChange={this.onDateChange}
+            />
+          }
 
         </View>
 
         <View style = {styles.placesView}>
             <Text style = {styles.subTitle}>Places</Text>
             <View style = {styles.placesIconView}>
-              <TouchableOpacity style = {styles.placesIconContainer}>
+              <TouchableOpacity
+                onPress = {() => this.handle_place_button_click('office')}
+                style = {styles.placesIconContainer}>
                 <Image
                 style = {styles.icon}
                 source = {require('../icons/office_disabled.png')}/>
                 <Text style = {styles.placeText}>office</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity style = {styles.placesIconContainer}>
+              <TouchableOpacity
+                onPress = {() => this.handle_place_button_click('home')}
+                style = {styles.placesIconContainer}>
                 <Image
                 style = {styles.icon}
                 source = {require('../icons/home_disabled.png')}/>
                 <Text style = {styles.placeText}>home</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity style = {styles.placesIconContainer}>
+              <TouchableOpacity
+                onPress = {() => this.handle_place_button_click('anywhere')}
+                style = {styles.placesIconContainer}>
                 <Image
                 style = {styles.icon}
                 source = {require('../icons/anywhere_disabled.png')}/>
@@ -117,7 +203,9 @@ class CreateScreen extends Component {
         </View>
 
         <View style = {styles.doneView}>
-          <TouchableOpacity style = {styles.doneRec}>
+          <TouchableOpacity
+            onPress = {this.handle_create}
+            style = {styles.doneRec}>
             <Text style = {styles.doneText}>Done</Text>
           </TouchableOpacity>
         </View>
@@ -174,6 +262,7 @@ const styles = StyleSheet.create({
     borderWidth:1,
     borderRadius:100,
     justifyContent:'center',
+
 
   },
   minuteText:{

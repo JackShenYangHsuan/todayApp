@@ -36,6 +36,18 @@ class ArticleScreen extends Component {
   }
 
   render() {
+
+    const {article} = this.props;
+        let title = article.title;
+        let image = article.img;
+        let content = article.content;
+        if(!content){
+          title = data.title;
+          image = data.image;
+          content = data.content;
+        }
+
+
     return (
       <View style={styles.container}>
           <Swiper

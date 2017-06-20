@@ -91,6 +91,7 @@ export function setInputValue(inputValue) {
     };
 }
 export function setDeadline(deadline) {
+
     return {
         type: '@CREATE/SET_DEADLINE',
         deadline: deadline
@@ -254,15 +255,12 @@ export function donePost(id) {
 
 export function listPosts(HomeTime = 0, realcreate = false) {
 
-  var id;
-  AsyncStorage.getItem('UID123', (err, result) => {
-      id = result;
-    });
-
     return (dispatch, getState) => {
         dispatch(startListPosts(realcreate));
 
-        return listPostsFromApi(HomeTime, id).then(listpost => {
+
+        return listPostsFromApi(HomeTime, '1').then(listpost => {
+            
             const posts = listpost;
             dispatch(endListPosts(posts));
         }).catch(err => {
@@ -275,7 +273,8 @@ export function listPosts(HomeTime = 0, realcreate = false) {
 export function createPost(place, deadline, time, input, has_deadline, user_id ) {
     return (dispatch, getState) => {
         return createPostFromApi(place, deadline, time, input, has_deadline, user_id).then( () => {
-            dispatch(listPosts(0, true));
+
+            // dispatch(listPosts(0));
         }).catch(err => {
             console.error('Error creating posts', err);
         });
@@ -548,7 +547,7 @@ export function set_music_prefer_state_from_api() {
 
 /*video*/
 export function set_video(input) {
-  
+
   return {
       type: '@VIDEO/SET',
       video: input
@@ -556,7 +555,6 @@ export function set_video(input) {
 };
 
 export function getVideo(genre) {
-  console.log('get video');
   return (dispatch, getState) => {
       return getVideoFromApi(genre).then(video => {
 

@@ -60,7 +60,7 @@ class HomeScreen extends Component {
  }
 
  componentWillMount() {
-        // this.props.dispatch(listPosts(0));
+        this.props.dispatch(listPosts(0));
         this.props.dispatch(setHomeTime(0));
         // this.props.dispatch(getArticle());
         this.props.dispatch(getVideo('nba'));
@@ -105,7 +105,7 @@ class HomeScreen extends Component {
     return (
       <View style = {styles.container}>
 
-
+        <Image style = {styles.arrow} source = {require('../icons/arrow.png')}/>
 
         <View style = {styles.time}>
 
@@ -119,6 +119,7 @@ class HomeScreen extends Component {
              showsHorizontalScrollIndicator={false}
              snapOnAndroid={true}
              removeClippedSubviews={false}
+             inactiveSlideScale = {0.7}
              onSnapToItem = {(slideIndex) => {this.handle_time_button_click((slideIndex+1)*5)} }
            >
             {slides}
@@ -187,6 +188,14 @@ const styles = StyleSheet.create({
     flex:1,
     display:'flex',
     backgroundColor:'white'
+  },
+
+  arrow:{
+    width:25,
+    height:20,
+    alignSelf:'center',
+    marginTop:40,
+    position:'absolute'
   },
   time:{
     flex:1.5,

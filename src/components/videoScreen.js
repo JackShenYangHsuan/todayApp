@@ -156,6 +156,8 @@ class VideoScreen extends Component {
                           <WebView
                           source={{uri: `${card[0]}`}}
                           style={{marginTop: 10}}
+                          contentInset = {{top: 160, left: 0, bottom: 0, right: 0}}
+                          scrollEnabled = 'false'
                           />
                       </View>
                   )
