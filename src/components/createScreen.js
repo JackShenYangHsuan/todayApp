@@ -60,13 +60,13 @@ handle_place_button_click = (place) => {
     this.props.dispatch(setPlace(place));
     this.props.dispatch(setPlaceDanger("is_false"));
     this.props.dispatch(setClicked(place));
-
-  }
+}
 handle_toggle_button_click = ()=> {
    this.props.dispatch(toggleHasDeadline());
-   console.log(this.props)
 }
 handle_create = () => {
+      const { goBack } = this.props.navigation;
+      goBack();
       if (!this.props.inputValue) {
           this.props.dispatch(setInputDanger(true));
           return;
@@ -89,7 +89,8 @@ handle_create = () => {
 
 
   render() {
-    const {estimate_button_color} = this.props;
+    const {estimate_button_color, clicked} = this.props;
+    console.log(estimate_button_color);
     return (
       <ScrollView style = {{backgroundColor:'white'}}>
         <Text style = {styles.title}>Create an Event</Text>
@@ -112,40 +113,40 @@ handle_create = () => {
               style = {styles.minutesButton}
 
               >
-              <View style = {styles.circle}>
-                <Text style = {styles.minuteText}>5</Text>
+              <View style = {estimate_button_color[0] ? styles.fillCircle: styles.circle}>
+                <Text style = {estimate_button_color[0] ? styles.whiteText : styles.minuteText} >5</Text>
               </View>
             </TouchableOpacity>
 
             <TouchableOpacity
               onPress = {() => this.handle_time_button_click(10)}
               style = {styles.minutesButton}>
-              <View style = {styles.circle}>
-                <Text style = {styles.minuteText}>10</Text>
+              <View style = {estimate_button_color[1] ? styles.fillCircle: styles.circle}>
+                <Text style = {estimate_button_color[1] ? styles.whiteText : styles.minuteText}>10</Text>
               </View>
             </TouchableOpacity>
 
             <TouchableOpacity
               onPress = {() => this.handle_time_button_click(15)}
               style = {styles.minutesButton}>
-              <View style = {styles.circle}>
-                <Text style = {styles.minuteText}>15</Text>
+              <View style = {estimate_button_color[2] ? styles.fillCircle: styles.circle}>
+                <Text style = {estimate_button_color[2] ? styles.whiteText : styles.minuteText}>15</Text>
               </View>
             </TouchableOpacity>
 
             <TouchableOpacity
               onPress = {() => this.handle_time_button_click(20)}
               style = {styles.minutesButton}>
-              <View style = {styles.circle}>
-                <Text style = {styles.minuteText}>20</Text>
+              <View style = {estimate_button_color[3] ? styles.fillCircle: styles.circle}>
+                <Text style = {estimate_button_color[3] ? styles.whiteText : styles.minuteText}>20</Text>
               </View>
             </TouchableOpacity>
 
             <TouchableOpacity
               onPress = {() => this.handle_time_button_click(25)}
               style = {styles.minutesButton}>
-              <View style = {styles.circle}>
-                <Text style = {styles.minuteText}>25</Text>
+              <View style = {estimate_button_color[4] ? styles.fillCircle: styles.circle}>
+                <Text style = {estimate_button_color[4] ? styles.whiteText : styles.minuteText}>25</Text>
               </View>
             </TouchableOpacity>
 
@@ -178,8 +179,8 @@ handle_create = () => {
                 style = {styles.placesIconContainer}>
                 <Image
                 style = {styles.icon}
-                source = {require('../icons/office_disabled.png')}/>
-                <Text style = {styles.placeText}>office</Text>
+                source = {clicked[1]? require('../icons/officeEnable.png') : require('../icons/office_disabled.png')}/>
+              <Text style = {clicked[1] ? styles.placeTextEnable: styles.placeText}>office</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
@@ -187,8 +188,8 @@ handle_create = () => {
                 style = {styles.placesIconContainer}>
                 <Image
                 style = {styles.icon}
-                source = {require('../icons/home_disabled.png')}/>
-                <Text style = {styles.placeText}>home</Text>
+                source = {clicked[0]? require('../icons/homeEnable.png') : require('../icons/home_disabled.png')}/>
+              <Text style = {clicked[0] ? styles.placeTextEnable: styles.placeText}>home</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
@@ -196,8 +197,8 @@ handle_create = () => {
                 style = {styles.placesIconContainer}>
                 <Image
                 style = {styles.icon}
-                source = {require('../icons/anywhere_disabled.png')}/>
-                <Text style = {styles.placeText}>anywhere</Text>
+                source = {clicked[2]? require('../icons/anywhereEnable.png') : require('../icons/anywhere_disabled.png')}/>
+              <Text style = {clicked[2] ? styles.placeTextEnable: styles.placeText}>anywhere</Text>
               </TouchableOpacity>
             </View>
         </View>
@@ -262,8 +263,16 @@ const styles = StyleSheet.create({
     borderWidth:1,
     borderRadius:100,
     justifyContent:'center',
-
-
+    backgroundColor:'white'
+  },
+  fillCircle:{
+    height:60,
+    width:60,
+    borderColor:'#E2E2E2',
+    borderWidth:0,
+    borderRadius:100,
+    justifyContent:'center',
+    backgroundColor:'#FD4D3A'
   },
   minuteText:{
     textAlign:'center',
@@ -271,6 +280,13 @@ const styles = StyleSheet.create({
     fontSize:25,
     fontWeight:'400',
     color:'#FD4D3A'
+  },
+  whiteText:{
+    textAlign:'center',
+    backgroundColor:'transparent',
+    fontSize:25,
+    fontWeight:'400',
+    color:'white'
   },
   subTitle0:{
     marginLeft:'5%',
@@ -312,6 +328,12 @@ const styles = StyleSheet.create({
     fontSize:15,
     fontWeight:'600',
     color:'#4B4B4B'
+  },
+  placeTextEnable:{
+    marginTop:'5%',
+    fontSize:15,
+    fontWeight:'600',
+    color:'#FD4D3A'
   },
   doneRec:{
     backgroundColor:'#FD4D3A',

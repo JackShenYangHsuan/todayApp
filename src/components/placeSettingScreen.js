@@ -29,7 +29,24 @@ class PlaceSettingScreen extends Component {
    super(props);
    this.state = {
      falseSwitchIsOn: true,
+     initialPosition: 'unknown'
    };
+ }
+ handleDone = () =>{
+   const { goBack } = this.props.navigation;
+   goBack();
+ }
+
+ componentWillMount(){
+   navigator.geolocation.getCurrentPosition(
+      (position) => {
+        var initialPosition = JSON.stringify(position);
+        this.setState({initialPosition});
+
+      },
+      (error) => alert(error.message),
+      {enableHighAccuracy: true}
+    );
  }
   render() {
     return (
@@ -76,7 +93,9 @@ class PlaceSettingScreen extends Component {
 
 
         <View style = {styles.doneView}>
-          <TouchableOpacity style = {styles.doneRec}>
+          <TouchableOpacity
+            onPress = {this.handleDone}
+            style = {styles.doneRec}>
             <Text style = {styles.doneText}>Save</Text>
           </TouchableOpacity>
         </View>

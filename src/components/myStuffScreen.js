@@ -49,11 +49,15 @@ class MyStuffScreen extends Component {
   this.props.dispatch(resetTime(id, time));
   this.props.dispatch(setMystuffButtonColor(0));
   this.props.dispatch(setHomeTime(0));
+  const { goBack } = this.props.navigation;
+  goBack();
 }
 handle_done_button_click(id){
   this.props.dispatch(donePost(id));
   this.props.dispatch(setHomeTime(0));
   this.props.dispatch(plusMusicStage());
+  const { goBack } = this.props.navigation;
+  goBack();
 }
 
   componentWillMount() {
@@ -65,84 +69,99 @@ handle_done_button_click(id){
     const { goBack } = this.props.navigation;
     const {posts, HomeTime, Mystuff_button_color, post_number} = this.props;
     const arr = [];
+    let count = 10;
     console.log(this.props)
     let arrCard = posts.map(p => {
       if(p.time == HomeTime)
-        arr.push([p.text, p.deadline, p.id]);
+        arr.push([p.text, p.deadline, p.id, count]);
+        count += 10;
     })
-    if(!arr.length) arr.push(['Nothing', 'None']);
+    if(!arr.length) arr.push(['You have done everything!', 'None']);
+    console.log(arr);
+
 
     return (
       <View style={styles.container}>
 
+      <View style = {styles.light}>
 
+      </View>
+      <View style = {styles.swiperContainer}>
       <Swiper
-
             cards={arr}
               renderCard={(card) => {
+                if(arr[0][1] != 'None'){
                   return (
-
-                      <View style={styles.card}>
-                        <View style = {styles.stuffView}>
-                          <Text style={styles.title}>{card[0]}</Text>
-                          <Text style={styles.subTitle}>( Deadline: {card[1]} )</Text>
-                        </View>
-                        <View style = {styles.timeView}>
-                          <Text style = {styles.notYet}>not yet, I still need... </Text>
-                          <View style = {styles.minuteButtonView}>
-                            <TouchableOpacity
-                              onPress = {() => this.handle_time_button_click(5,card[2])}
-                              style = {styles.minutesButton}>
-                              <View style = {styles.circle}>
-                                <Text style = {styles.minuteText}>5</Text>
-                              </View>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity
-                              onPress = {() => this.handle_time_button_click(10,card[2])}
-                              style = {styles.minutesButton}>
-                              <View style = {styles.circle}>
-                                <Text style = {styles.minuteText}>10</Text>
-                              </View>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity
-                              onPress = {() => this.handle_time_button_click(15,card[2])}
-                              style = {styles.minutesButton}>
-                              <View style = {styles.circle}>
-                                <Text style = {styles.minuteText}>15</Text>
-                              </View>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity
-                              onPress = {() => this.handle_time_button_click(20,card[2])}
-                              style = {styles.minutesButton}>
-                              <View style = {styles.circle}>
-                                <Text style = {styles.minuteText}>20</Text>
-                              </View>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity
-                              onPress = {() => this.handle_time_button_click(25,card[2])}
-                              style = {styles.minutesButton}>
-                              <View style = {styles.circle}>
-                                <Text style = {styles.minuteText}>25</Text>
-                              </View>
-                            </TouchableOpacity>
-
-                          </View>
-                        </View>
-                        <TouchableOpacity
-                          onPress = {() => this.handle_done_button_click(card[2])}
-                          style = {styles.doneView}>
-
-                            <Text style = {styles.doneText}>
-                              DONE
-                            </Text>
-
-                        </TouchableOpacity>
+                    <View style={styles.card}>
+                      <View style = {styles.stuffView}>
+                        <Text style={styles.title}>{card[0]}</Text>
+                        <Text style={styles.subTitle}>( Deadline: {card[1]} )</Text>
                       </View>
+                      <View style = {styles.timeView}>
+                        <Text style = {styles.notYet}>not yet, I still need... </Text>
+                        <View style = {styles.minuteButtonView}>
+                          <TouchableOpacity
+                            onPress = {() => this.handle_time_button_click(5,card[2])}
+                            style = {styles.minutesButton}>
+                            <View style = {styles.circle}>
+                              <Text style = {styles.minuteText}>5</Text>
+                            </View>
+                          </TouchableOpacity>
+
+                          <TouchableOpacity
+                            onPress = {() => this.handle_time_button_click(10,card[2])}
+                            style = {styles.minutesButton}>
+                            <View style = {styles.circle}>
+                              <Text style = {styles.minuteText}>10</Text>
+                            </View>
+                          </TouchableOpacity>
+
+                          <TouchableOpacity
+                            onPress = {() => this.handle_time_button_click(15,card[2])}
+                            style = {styles.minutesButton}>
+                            <View style = {styles.circle}>
+                              <Text style = {styles.minuteText}>15</Text>
+                            </View>
+                          </TouchableOpacity>
+
+                          <TouchableOpacity
+                            onPress = {() => this.handle_time_button_click(20,card[2])}
+                            style = {styles.minutesButton}>
+                            <View style = {styles.circle}>
+                              <Text style = {styles.minuteText}>20</Text>
+                            </View>
+                          </TouchableOpacity>
+
+                          <TouchableOpacity
+                            onPress = {() => this.handle_time_button_click(25,card[2])}
+                            style = {styles.minutesButton}>
+                            <View style = {styles.circle}>
+                              <Text style = {styles.minuteText}>25</Text>
+                            </View>
+                          </TouchableOpacity>
+
+                        </View>
+                      </View>
+                      <TouchableOpacity
+                        onPress = {() => this.handle_done_button_click(card[2])}
+                        style = {styles.doneView}>
+
+                          <Text style = {styles.doneText}>
+                            DONE
+                          </Text>
+
+                      </TouchableOpacity>
+                    </View>
                   )
+                }
+                else return (
+                  <View style={styles.card}>
+                    <View style = {styles.stuffView}>
+                      <Text style={styles.title}>{card[0]}</Text>
+                    </View>
+                  </View>
+
+                )
               }}
               onSwiped={(cardIndex) => {console.log(cardIndex)}}
               onSwipedAll={this.handleSwipedAll}
@@ -150,21 +169,14 @@ handle_done_button_click(id){
               backgroundColor={'white'}
               disableBottomSwipe='true'
               disableTopSwipe='true'
+              childrenOnTop = 'true'
+              onSwipedAll = {() => goBack()}
+              style = {styles.swiper}
+              verticalSwipe = {false}
+              
               >
           </Swiper>
-
-          {
-            this.state.swipedAllCards?
-              <View style = {styles.noCard}>
-                <Text style={styles.bottomText}>Great! You have finished all your stuff!</Text>
-                <TouchableOpacity onPress={this.handleGoBack}>
-                  <View>
-                    <Text style={styles.bottomText}>Go back</Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
-            : <View></View>
-          }
+          </View>
       </View>
     );
   }
@@ -173,15 +185,41 @@ handle_done_button_click(id){
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    display:'flex'
   },
+  swiperContainer:{
+    flex:12,
+    justifyContent:'center'
+  },
+  swiper:{
+
+    position:'absolute',
+    backgroundColor:'transparent'
+  },
+  override:{
+    marginTop:10
+
+  },
+  // light:{
+  //   width:'90%',
+  //   height:'10%',
+  //   backgroundColor:'#BDE4FC',
+  //   flex:1,
+  //   position:'absolute',
+  //   marginTop:25,
+  //   zIndex:100,
+  //   alignSelf:'center'
+  // },
   card: {
     flex: 1,
     borderRadius: 10,
-    borderWidth: 2,
+    borderWidth: 4,
     borderColor: '#87C1E5',
     backgroundColor: 'white',
     display:'flex',
-    justifyContent:'center'
+    justifyContent:'center',
+    height:'100%',
+
   },
   noCard: {
     flex: 1,

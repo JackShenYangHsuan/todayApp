@@ -31,11 +31,10 @@ class ArticleScreen extends Component {
     this.setState({
       swipedAllCards: true
     });
-  };
-  handleGoBack = () => {
     const { goBack } = this.props.navigation;
     goBack();
-  }
+  };
+
 
   render() {
     var randomId = Math.floor(Math.random() * 7);
@@ -72,21 +71,9 @@ class ArticleScreen extends Component {
               disableBottomSwipe='true'
               disableTopSwipe='true'
               verticalSwipe = {false}
-              
+
               >
           </Swiper>
-          {
-            this.state.swipedAllCards?
-              <View style = {styles.noCard}>
-                <Text style={styles.bottomText}>Oops, there are no more articles for you</Text>
-                <TouchableOpacity onPress={this.handleGoBack}>
-                  <View>
-                    <Text style={styles.bottomText}>Go back</Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
-            : <View></View>
-          }
       </View>
     );
   }
@@ -99,7 +86,7 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     borderRadius: 10,
-    borderWidth: 2,
+    borderWidth:4,
     borderColor: '#D63E66',
     justifyContent: 'center',
     backgroundColor: 'white',

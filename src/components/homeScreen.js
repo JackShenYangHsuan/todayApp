@@ -3,7 +3,7 @@
  * https://github.com/facebook/react-native
  * @flow
  */
-
+import {StackNavigator, NavigationActions, addNavigationHelpers} from 'react-navigation';
 import React, { Component,PropTypes } from 'react';
 import {
   AppRegistry,
@@ -61,7 +61,7 @@ class HomeScreen extends Component {
 
  componentWillMount() {
         this.props.dispatch(listPosts(0));
-        this.props.dispatch(setHomeTime(10));
+        this.props.dispatch(setHomeTime(15));
         this.props.dispatch(getArticle());
         // this.props.dispatch(getVideo('nba'));
         this.props.dispatch(set_video_genres_state_from_api());
@@ -88,9 +88,12 @@ class HomeScreen extends Component {
 
   handle_time_button_click(time){
     this.props.dispatch(setHomeTime(time));
+    this.props.dispatch(set_video_genres_state_from_api());
     // this.props.dispatch(listPosts(time));
   }
-
+  static navigationOptions = {
+    title: 'Welcome',
+  };
 
   render() {
 
@@ -113,7 +116,7 @@ class HomeScreen extends Component {
         <Carousel
              sliderWidth={360}
              itemWidth={90}
-             firstItem={1}
+             firstItem={2}
              inactiveSlideScale={0.94}
              inactiveSlideOpacity={0.6}
              enableMomentum={false}

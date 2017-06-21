@@ -37,21 +37,21 @@ export function set_article(input) {
 };
 
 export function setHomeButtonColor(time = 0) {
-    var Home_button_color = ["secondary", "secondary", "secondary", "secondary", "secondary"];
+    var Home_button_color = [false, false, false, false, false];
     if(time == 25){
-      Home_button_color = ["#244048", "secondary", "secondary", "secondary", "secondary"];
+      Home_button_color = ["#244048", false, false, false, false];
     }
     else if(time == 10){
-      Home_button_color = ["secondary", "primary", "secondary", "secondary", "secondary"];
+      Home_button_color = [false, true, false, false, false];
     }
     else if(time == 5){
-      Home_button_color = ["secondary", "secondary", "primary", "secondary", "secondary"];
+      Home_button_color = [false, false, true, false, false];
     }
     else if(time == 15){
-      Home_button_color = ["secondary", "secondary", "secondary", "primary", "secondary"];
+      Home_button_color = [false, false, false, true, false];
     }
     else if(time == 20){
-      Home_button_color = ["secondary", "secondary", "secondary", "secondary", "primary"];
+      Home_button_color = [false, false, false, false, true];
     }
     return {
         type: '@HOME/SET_BUTTON_COLOR',
@@ -98,21 +98,21 @@ export function setDeadline(deadline) {
     };
 }
 export function setEstimateButtonColor(time) {
-    var estimate_button_color = ["secondary", "secondary", "secondary", "secondary", "secondary"];
+    var estimate_button_color = [false, false, false, false, false];
     if(time == 5){
-      estimate_button_color = ["primary", "secondary", "secondary", "secondary", "secondary"];
+      estimate_button_color = [true, false, false, false, false];
     }
     else if(time == 10){
-      estimate_button_color = ["secondary", "primary", "secondary", "secondary", "secondary"];
+      estimate_button_color = [false, true, false, false, false];
     }
     else if(time == 15){
-      estimate_button_color = ["secondary", "secondary", "primary", "secondary", "secondary"];
+      estimate_button_color = [false, false, true, false, false];
     }
     else if(time == 20){
-      estimate_button_color = ["secondary", "secondary", "secondary", "primary", "secondary"];
+      estimate_button_color = [false, false, false, true, false];
     }
     else if(time == 25){
-      estimate_button_color = ["secondary", "secondary", "secondary", "secondary", "primary"];
+      estimate_button_color = [false, false, false, false, true];
     }
     return {
         type: '@CREATE/SET_ESTIMATE_TIME_BUTTON',
@@ -120,15 +120,15 @@ export function setEstimateButtonColor(time) {
     };
 }
 export function setDeadlineButtonColor(time) {
-    var deadline_button_color = ["secondary", "secondary", "secondary"];
+    var deadline_button_color = [false, false, false];
     if(time == 0){
-      deadline_button_color = ["primary", "secondary", "secondary"];
+      deadline_button_color = [true, false, false];
     }
     else if(time == 1){
-      deadline_button_color = ["secondary", "primary", "secondary"];
+      deadline_button_color = [false, true, false];
     }
     else if(time == 2){
-      deadline_button_color = ["secondary", "secondary", "primary"];
+      deadline_button_color = [false, false, true];
     }
     return {
         type: '@CREATE/SET_DEADLINE_BUTTON',
@@ -136,15 +136,15 @@ export function setDeadlineButtonColor(time) {
     };
 }
 export function setClicked(place) {
-    var clicked = ["false", "false", "false"];
+    var clicked = [false, false, false];
     if(place == "home"){
-      clicked = ["true", "false", "false"]
+      clicked = [true, false, false]
     }
     else if(place == "office"){
-      clicked = ["false", "true", "false"]
+      clicked = [false, true, false]
     }
     else if(place == "anywhere"){
-      clicked = ["false", "false", "true"]
+      clicked = [false, false, true]
     }
     return {
         type: '@CREATE/SET_CLICKED',
@@ -182,21 +182,21 @@ export function setLinkText(link_text) {
 
 /*mystuff*/
 export function setMystuffButtonColor(time) {
-    var Mystuff_button_color = ["secondary", "secondary", "secondary", "secondary", "secondary"];
+    var Mystuff_button_color = [false, false, false, false, false];
     if(time == 5){
-      Mystuff_button_color = ["warning", "secondary", "secondary", "secondary", "secondary"];
+      Mystuff_button_color = ["warning", false, false, false, false];
     }
     else if(time == 10){
-      Mystuff_button_color = ["secondary", "warning", "secondary", "secondary", "secondary"];
+      Mystuff_button_color = [false, "warning", false, false, false];
     }
     else if(time == 15){
-      Mystuff_button_color = ["secondary", "secondary", "warning", "secondary", "secondary"];
+      Mystuff_button_color = [false, false, "warning", false, false];
     }
     else if(time == 20){
-      Mystuff_button_color = ["secondary", "secondary", "secondary", "warning", "secondary"];
+      Mystuff_button_color = [false, false, false, "warning", false];
     }
     else if(time == 25){
-      Mystuff_button_color = ["secondary", "secondary", "secondary", "secondary", "warning"];
+      Mystuff_button_color = [false, false, false, false, "warning"];
     }
     return {
         type: '@MYSTUFF/SET_MYSTUFF_TIME_BUTTON',

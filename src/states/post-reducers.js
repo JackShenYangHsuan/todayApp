@@ -19,7 +19,7 @@ export function Video(state = initVidoeState, action) {
 
 const initHomeState = {
   HomeTime: 0,
-  Home_button_color: ["secondary", "secondary", "secondary", "secondary", "secondary"],
+  Home_button_color: [false, false, false, false, false],
   article: {}
 };
 
@@ -46,7 +46,7 @@ export function Home(state = initHomeState, action) {
 }
 
 const initMystuffState = {
-  Mystuff_button_color: ["secondary", "secondary", "secondary", "secondary", "secondary"],
+  Mystuff_button_color: [false, false, false, false, false],
   post_number: 0
 };
 
@@ -76,10 +76,10 @@ const initCreateState = {
     estimate_time: -1,
     has_deadline: true,
     deadline: "",
-    estimate_button_color: ["secondary", "secondary", "secondary", "secondary", "secondary"],
-    deadline_button_color: ["secondary", "secondary", "secondary"],
+    estimate_button_color: [false, false, false, false, false],
+    deadline_button_color: [false, false, false],
     place: "",
-    clicked: ["false", "false", "false"],
+    clicked: [false, false, false],
     link_text: '/create'
 }
 

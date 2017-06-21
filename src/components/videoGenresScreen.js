@@ -55,10 +55,13 @@ class VideoGenresScreen extends Component {
     genres.push({topic: video_search, able: true});
     this.props.dispatch(set_video_genres(genres));
     this.props.dispatch(input_video(''));
+
   }
 
   handle_save_genres_click = (genres) => {
       this.props.dispatch(sent_video_genres_to_api(genres));
+      const { goBack } = this.props.navigation;
+      goBack();
   }
 
 

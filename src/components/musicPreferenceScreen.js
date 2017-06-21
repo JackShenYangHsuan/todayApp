@@ -55,6 +55,8 @@ class MusicPreferences extends Component {
     }
   handle_save_music_prefer_click(prefer){
       this.props.dispatch(sent_music_prefer_to_api(prefer));
+      const { goBack } = this.props.navigation;
+      goBack();
   }
 
 
