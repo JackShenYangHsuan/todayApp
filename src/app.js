@@ -1,5 +1,6 @@
 import React from 'react';
-import {BackHandler} from 'react-native';
+import {BackHandler
+} from 'react-native';
 
 import {createStore, combineReducers, compose, applyMiddleware} from 'redux';
 import thunkMiddleware from 'redux-thunk';
@@ -44,7 +45,6 @@ const AppNavigator = StackNavigator({
 }, {
     headerMode: 'none'
 });
-
 class AppWithStyleAndNavigator extends React.Component {
     render() {
         return (
@@ -66,7 +66,17 @@ class AppWithStyleAndNavigator extends React.Component {
             return true;
         });
     }
-
+    componentWillMount = async() => {
+          try{
+             var value = await AsyncStorage.getItem('id');
+             if(value!=null){
+               this.props.navigation.navigate('Home');
+             }else{
+             }
+          }catch(error){
+              console.log(error);
+          }
+    }
     componentWillUnmount() {
         BackHandler.removeEventListener('hardwareBackPress');
     }

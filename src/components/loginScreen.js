@@ -39,6 +39,17 @@ class LoginScreen extends Component {
 
    };
  }
+    componentWillMount = async() => {
+          try{
+             var value = await AsyncStorage.getItem('id');
+             if(value!=null){
+               this.props.navigation.navigate('Home');
+             }else{
+             }
+          }catch(error){
+              console.log(error);
+          }
+    }
 
 
     handleUserInputChange(text) {
@@ -64,10 +75,17 @@ class LoginScreen extends Component {
       }
       this.props.dispatch(findAccount("", login_username_value, login_password_value));
 
-      setTimeout(() => {
-          AsyncStorage.getItem('id', (res) => {
-            console.log(res);
-          });
+      setTimeout(async () => {
+          try{
+             var value=await AsyncStorage.getItem('id');
+             if(value!=null){
+               console.log(value);
+             }else{
+               console.log("fail stored");
+             }
+          }catch(error){
+              console.log(error);
+          }
           const {id} = this.props;
           if(id) {
             this.props.navigation.navigate('Home');

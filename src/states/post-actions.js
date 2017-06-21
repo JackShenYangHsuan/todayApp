@@ -389,9 +389,15 @@ export function account_exist(input) {
 /*account api*/
 export function findAccount(id, username, password){
   return (dispatch, getState) => {
-      return findAccountFromApi(id, username, password).then( accounts => {
+      return findAccountFromApi(id, username, password).then( async (accounts) => {
           if(accounts.length > 0){
-            AsyncStorage.setItem('id', accounts[0].id);
+            // AsyncStorage.setItem('id', accounts[0].id);
+            try{
+               await AsyncStorage.setItem('id', accounts[0].id);
+               console.log("success");
+            }catch(error){
+               console.log(error);
+            }
             dispatch(set_id_state(accounts[0].id));
           }
           else if(accounts.length == 0){
