@@ -404,7 +404,7 @@ const initVideoSettingState = {
       able: false
     }
   ],
-  video_search: ''
+  videoSearch: ''
 }
 
 export function Video_genres(state = initVideoSettingState, action) {
@@ -417,7 +417,7 @@ export function Video_genres(state = initVideoSettingState, action) {
         case '@VIDEO_GENRES/INPUT_VIDEO':
             return {
                 ...state,
-                video_search: action.video_search
+                videoSearch: action.videoSearch
             };
         default:
             return state;

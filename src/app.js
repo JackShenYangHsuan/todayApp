@@ -21,6 +21,8 @@ import MyStuffScreen from './components/myStuffScreen';
 import PlaceSettingScreen from './components/placeSettingScreen';
 import SettingScreen from './components/settingScreen';
 import VideoScreen from './components/videoScreen';
+import VideoGenresScreen from './components/videoGenresScreen';
+import MusicPreferenceScreen from './components/musicPreferenceScreen';
 
 
 
@@ -30,8 +32,11 @@ const AppNavigator = StackNavigator({
     Home: {screen: HomeScreen},
     MyStuff: {screen: MyStuffScreen},
     PlaceSetting: {screen: PlaceSettingScreen},
+    VideoGenres: {screen: VideoGenresScreen},
+    MusicPrefernce: {screen: MusicPreferenceScreen},
     Setting: {screen: SettingScreen},
     Video: {screen: VideoScreen},
+
 }, {
     headerMode: 'none'
 });

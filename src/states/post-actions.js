@@ -260,7 +260,7 @@ export function listPosts(HomeTime = 0, realcreate = false) {
 
 
         return listPostsFromApi(HomeTime, '1').then(listpost => {
-            
+
             const posts = listpost;
             dispatch(endListPosts(posts));
         }).catch(err => {
@@ -479,7 +479,7 @@ export function set_home_location_by_address(home_address) {
 export function input_video(input) {
   return {
       type: '@VIDEO_GENRES/INPUT_VIDEO',
-      video_search: input
+      videoSearch: input
   };
 };
 
@@ -494,7 +494,7 @@ export function sent_video_genres_to_api(genres) {
     return (dispatch, getState) => {
         return sentVideoGenresToApi(genres).then(location => {
         }).catch(err => {
-            console.error('Error senttig genres', err);
+            console.error('Error senting genres', err);
         });
     };
 };
@@ -531,7 +531,7 @@ export function sent_music_prefer_to_api(prefer) {
     return (dispatch, getState) => {
         return sentMusicPreferToApi(prefer).then(location => {
         }).catch(err => {
-            console.error('Error senttig prefer', err);
+            console.error('Error sending prefer', err);
         });
     };
 };
@@ -540,7 +540,7 @@ export function set_music_prefer_state_from_api() {
         return getMusicPreferFromApi().then(prefer => {
           dispatch(set_music_prefer(prefer));
         }).catch(err => {
-            console.error('Error senttig prefer', err);
+            console.error('Error setting prefer', err);
         });
     };
 };

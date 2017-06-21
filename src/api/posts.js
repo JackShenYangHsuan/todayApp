@@ -267,21 +267,27 @@ export function resetPostTime(id, time) {
   });
 }
 
-export function sentVideoGenres(genres, user_id){
+export function sentVideoGenres(genres, user_id = '1'){
   let url = `${postBaseUrl}/accounts/genres`;
   console.log(`Making POST request to: ${url}`);
 
-  return fetch(url,{
-    method:'post',
-    body: JSON.stringify([genres, user_id])
+  return fetch(url, {
+      method: 'POST',
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+          genres, user_id
+      })
   }).then(function(res) {
       if (res.status !== 200)
           throw new Error(`Unexpected response code: ${res.status}`);
 
-      return res.data;
+      return res.json();
   });
 }
-export function getVideoGenres(user_id){
+export function getVideoGenres(user_id = '1'){
   let url = `${postBaseUrl}/accounts/genres?user_id=${user_id}`;
   console.log(`Making POST request to: ${url}`);
 
@@ -289,7 +295,9 @@ export function getVideoGenres(user_id){
       if (res.status !== 200)
           throw new Error(`Unexpected response code: ${res.status}`);
 
-      return res.data;
+      return res.json().then((res) => {
+        return res;
+      });
   });
 }
 
@@ -333,29 +341,42 @@ export function getArticle(){
 
 }
 
-export function sentMusicPrefer(prefer, user_id){
+export function sentMusicPrefer(prefer, user_id = '1'){
   let url = `${postBaseUrl}/accounts/prefer`;
   console.log(`Making POST request to: ${url}`);
 
-  return fetch(url,{
-    method:'post',
-    body: JSON.stringify([prefer, user_id])
+  return fetch(url, {
+      method: 'POST',
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+          prefer,
+          user_id
+      })
   }).then(function(res) {
       if (res.status !== 200)
           throw new Error(`Unexpected response code: ${res.status}`);
 
-      return res.data;
+      return res.json();
   });
 }
-export function getMusicPrefer(user_id){
+export function getMusicPrefer(user_id = '1'){
   let url = `${postBaseUrl}/accounts/prefer?user_id=${user_id}`;
   console.log(`Making POST request to: ${url}`);
 
-  return fetch(url).then(function(res) {
+  return fetch(url, {
+      headers: {
+          'Accept': 'application/json'
+      }
+  }).then(res => {
       if (res.status !== 200)
           throw new Error(`Unexpected response code: ${res.status}`);
+      return res.json().then((res) => {
+        return res;
+      });
 
-      return res.data;
   });
 }
 

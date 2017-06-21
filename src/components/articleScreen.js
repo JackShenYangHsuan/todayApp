@@ -38,29 +38,28 @@ class ArticleScreen extends Component {
   }
 
   render() {
-
+    var randomId = Math.floor(Math.random() * 7);
     const {article} = this.props;
     const arr = [];
-    console.log(this.props);
-    // let arrCard = article.map(p => {
-    //     arr.push([p.url]);
-    // });
-    // if(!arr.length) arr.push(['Nothing', 'None']);
-
+    console.log(randomId);
+    arr[0] = [article[randomId].url];
+    arr[1] = [article[randomId+1].url];
+    arr[2] = [article[randomId+2].url];
 
 
     return (
       <View style={styles.container}>
           <Swiper
+
               cards={arr}
               renderCard={(card) => {
                   return (
                       <View style={styles.card}>
                         <WebView
-                        source={{uri: 'https://stackoverflow.com/questions/9484474/json-parse-to-array'}}
+                        source={{uri: card[0]}}
                         style={{marginTop: 10}}
                         contentInset = {{top: 0, left: 0, bottom: 0, right: 0}}
-                        scrollEnabled = 'false'
+                        scrollEnabled = 'true'
                         />
 
                       </View>
@@ -72,7 +71,8 @@ class ArticleScreen extends Component {
               backgroundColor={'white'}
               disableBottomSwipe='true'
               disableTopSwipe='true'
-              childrenOnTop='true'
+              verticalSwipe = {false}
+              
               >
           </Swiper>
           {
