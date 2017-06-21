@@ -173,7 +173,7 @@ handle_done_button_click(id){
               onSwipedAll = {() => goBack()}
               style = {styles.swiper}
               verticalSwipe = {false}
-              
+
               >
           </Swiper>
           </View>
@@ -227,10 +227,10 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: 'center',
-    fontSize: 40,
-    fontWeight: '600',
+    fontSize: 30,
+    fontWeight: '400',
     backgroundColor: 'transparent',
-    color:'#FD4D3A'
+    color:'#2A729F'
   },
   bottomText: {
     textAlign: 'center',

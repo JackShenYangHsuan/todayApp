@@ -39,6 +39,7 @@
 		2DCD954D1E0B4F2C00145EB5 /* todayAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* todayAppTests.m */; };
 		473BC6DFE8344ADFA0D42670 /* libyoga.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C5941161227487C8924AE02 /* libyoga.a */; };
 		4BA48EB3AEE3443F812724F1 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5DEDF3621B6249E4A4DAA8DA /* MaterialCommunityIcons.ttf */; };
+		555CE5D97C094350BA8C8809 /* libRNSound.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 929E38939E584E6A81A3D280 /* libRNSound.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		5F413119D9FF49D79D0D9197 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E780AEF13D2474DA77CA4D4 /* Zocial.ttf */; };
 		6D50AF5CB2DE40AE816A8A63 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FB9E884FAE2460C9EB5F571 /* Entypo.ttf */; };
@@ -145,6 +146,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 1017893B1B283EE1006C41B8;
 			remoteInfo = RNCookieManagerTests;
+		};
+		04CA76DF1EFA7CF900F5B498 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DE80979A641D4D13BF05D919 /* RNSound.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 19825A1E1BD4A89800EE0337;
+			remoteInfo = RNSound;
 		};
 		139105C01AF99BAD00B5F7CC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -332,9 +340,11 @@
 		8296BC0AE3A44253BE09106E /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		83B21A6A5CDD4950BA6B8DA8 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		929E38939E584E6A81A3D280 /* libRNSound.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSound.a; sourceTree = "<group>"; };
 		97BBBFC05AA6401F96E72EF2 /* libjschelpers.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libjschelpers.a; sourceTree = "<group>"; };
 		9EE4A97861A940B4BD5AFA07 /* libcxxreact.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libcxxreact.a; sourceTree = "<group>"; };
 		A8931AA7887C4CCFB5C04519 /* RNTHorizontalPicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNTHorizontalPicker.xcodeproj; path = "../node_modules/react-native-horizontal-picker/RNTHorizontalPicker.xcodeproj"; sourceTree = "<group>"; };
+		DE80979A641D4D13BF05D919 /* RNSound.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSound.xcodeproj; path = "../node_modules/react-native-sound/RNSound.xcodeproj"; sourceTree = "<group>"; };
 		E5DFA81A69FC4E7F9F1B9AC9 /* Exemple.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = Exemple.xcodeproj; path = "../node_modules/react-native-deck-swiper/Exemples/ios/Exemple.xcodeproj"; sourceTree = "<group>"; };
 		EA6A606080B94B35A561480E /* RNCookieManager.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNCookieManager.xcodeproj; path = "../node_modules/react-native-cookie/ios/RNCookieManager.xcodeproj"; sourceTree = "<group>"; };
 		EEE09229B9704CACB573F91D /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
@@ -370,6 +380,7 @@
 				9714BAE5D01D4AC5940C3DE9 /* libcxxreact.a in Frameworks */,
 				BE3DDB5690DB40F68A450C5E /* libjschelpers.a in Frameworks */,
 				D3E4A32943AC41C0A00EB4D6 /* libRNCookieManager.a in Frameworks */,
+				555CE5D97C094350BA8C8809 /* libRNSound.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,6 +496,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		04CA76BD1EFA7CF900F5B498 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				04CA76E01EFA7CF900F5B498 /* libRNSound.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		139105B71AF99BAD00B5F7CC /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -583,6 +602,7 @@
 				E5DFA81A69FC4E7F9F1B9AC9 /* Exemple.xcodeproj */,
 				A8931AA7887C4CCFB5C04519 /* RNTHorizontalPicker.xcodeproj */,
 				EA6A606080B94B35A561480E /* RNCookieManager.xcodeproj */,
+				DE80979A641D4D13BF05D919 /* RNSound.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -784,6 +804,10 @@
 					ProjectRef = EA6A606080B94B35A561480E /* RNCookieManager.xcodeproj */;
 				},
 				{
+					ProductGroup = 04CA76BD1EFA7CF900F5B498 /* Products */;
+					ProjectRef = DE80979A641D4D13BF05D919 /* RNSound.xcodeproj */;
+				},
+				{
 					ProductGroup = 04CA74381EF8231500F5B498 /* Products */;
 					ProjectRef = A8931AA7887C4CCFB5C04519 /* RNTHorizontalPicker.xcodeproj */;
 				},
@@ -881,6 +905,13 @@
 			fileType = wrapper.cfbundle;
 			path = RNCookieManagerTests.xctest;
 			remoteRef = 04CA765E1EF95BAE00F5B498 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		04CA76E01EFA7CF900F5B498 /* libRNSound.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNSound.a;
+			remoteRef = 04CA76DF1EFA7CF900F5B498 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		139105C11AF99BAD00B5F7CC /* libRCTSettings.a */ = {
@@ -1180,12 +1211,14 @@
 					"$(SRCROOT)/../node_modules/react-native-native-video-player/ios/RNVideoPlayer",
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
 					"$(SRCROOT)/../node_modules/react-native-cookie/ios",
+					"$(SRCROOT)/../node_modules/react-native-sound/RNSound",
 				);
 				INFOPLIST_FILE = todayAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1220,12 +1253,14 @@
 					"$(SRCROOT)/../node_modules/react-native-native-video-player/ios/RNVideoPlayer",
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
 					"$(SRCROOT)/../node_modules/react-native-cookie/ios",
+					"$(SRCROOT)/../node_modules/react-native-sound/RNSound",
 				);
 				INFOPLIST_FILE = todayAppTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1261,6 +1296,7 @@
 					"$(SRCROOT)/../node_modules/react-native-native-video-player/ios/RNVideoPlayer",
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
 					"$(SRCROOT)/../node_modules/react-native-cookie/ios",
+					"$(SRCROOT)/../node_modules/react-native-sound/RNSound",
 				);
 				INFOPLIST_FILE = todayApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1288,6 +1324,7 @@
 					"$(SRCROOT)/../node_modules/react-native-native-video-player/ios/RNVideoPlayer",
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
 					"$(SRCROOT)/../node_modules/react-native-cookie/ios",
+					"$(SRCROOT)/../node_modules/react-native-sound/RNSound",
 				);
 				INFOPLIST_FILE = todayApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1322,11 +1359,13 @@
 					"$(SRCROOT)/../node_modules/react-native-native-video-player/ios/RNVideoPlayer",
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
 					"$(SRCROOT)/../node_modules/react-native-cookie/ios",
+					"$(SRCROOT)/../node_modules/react-native-sound/RNSound",
 				);
 				INFOPLIST_FILE = "todayApp-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1371,11 +1410,13 @@
 					"$(SRCROOT)/../node_modules/react-native-native-video-player/ios/RNVideoPlayer",
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
 					"$(SRCROOT)/../node_modules/react-native-cookie/ios",
+					"$(SRCROOT)/../node_modules/react-native-sound/RNSound",
 				);
 				INFOPLIST_FILE = "todayApp-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1424,6 +1465,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.todayApp-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1448,6 +1490,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",

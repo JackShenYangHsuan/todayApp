@@ -133,6 +133,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-sound')
     compile project(':react-native-cookie')
     compile project(':react-native-youtube')
     compile project(':react-native-native-video-player')

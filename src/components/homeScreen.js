@@ -19,7 +19,9 @@ import {
   requireNativeComponent,
   Event,
   Picker,
-  Button
+  Button,
+  Animated,
+  Easing
 } from 'react-native';
 
 import {connect} from 'react-redux';
@@ -54,6 +56,10 @@ class HomeScreen extends Component {
 
   constructor(props) {
    super(props);
+   this.widthValue = new Animated.Value(0);
+   this.dotValue1 = new Animated.Value(0);
+   this.dotValue2 = new Animated.Value(0);
+   this.dotValue3 = new Animated.Value(0);
    this.state = {
      language:undefined
    };
@@ -95,8 +101,75 @@ class HomeScreen extends Component {
     title: 'Welcome',
   };
 
-  render() {
+  stretchAnimate = () => {
+    this.widthValue.setValue(0);
+    this.dotValue1.setValue(0);
+    this.dotValue2.setValue(0);
+    this.dotValue3.setValue(0);
+    isStretched = true;
+    const createAnimation = function (value, duration, easing, delay = 0) {
+      return Animated.timing(
+        value,
+        {
+          toValue: 1,
+          duration,
+          easing,
+          delay
+        }
+      )
+    };
+    Animated.parallel([
+      createAnimation(this.widthValue, 250, Easing.easeInElastic),
+      createAnimation(this.dotValue1, 2000, Easing.ease, 400),
+      createAnimation(this.dotValue2, 2000, Easing.ease, 600),
+      createAnimation(this.dotValue3, 2000, Easing.ease, 800),
+    ]).start()
+  }
 
+  backAnimate = () => {
+    this.widthValue.setValue(0);
+    this.dotValue1.setValue(0);
+    this.dotValue2.setValue(0);
+    this.dotValue3.setValue(0);
+    isStretched = false;
+    const createAnimation = function (value, duration, easing, delay = 0) {
+      return Animated.timing(
+        value,
+        {
+          toValue: 1,
+          duration,
+          easing,
+          delay
+        }
+      )
+    };
+    Animated.parallel([
+      createAnimation(this.dotValue1, 2000, Easing.ease, 0),
+      createAnimation(this.dotValue2, 2000, Easing.ease, 200),
+      createAnimation(this.dotValue3, 2000, Easing.ease, 400),
+      createAnimation(this.widthValue, 250, Easing.easeInElastic, 800),
+    ]).start()
+  }
+
+
+
+  render() {
+    const widthStretch = this.widthValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: [90, 150]
+    });
+    const dotStretch1 = this.dotValue1.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, 100]
+    });
+    const dotStretch2 = this.dotValue2.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, 100]
+    });
+    const dotStretch3 = this.dotValue3.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, 100]
+    });
     const slides = ENTRIES1.map((entry, index) => {
             return (
                 <View key={`entry-${index}`} style={styles.circle}>
@@ -169,9 +242,26 @@ class HomeScreen extends Component {
             <Image style = {styles.icon} source = {require('../icons/add.png')}/>
           </TouchableOpacity>
 
-          <View style = {styles.musicView}>
-            <Image style = {styles.musicIcon} source = {require('../icons/music.png')}/>
-          </View>
+
+            <TouchableOpacity onPress={this.stretchAnimate}>
+              <Animated.View
+                style={[styles.musicView, {width:widthStretch}]}
+              >
+                <Animated.View
+                  style={[styles.dots, {opacity:dotStretch1}]}
+                  onPress={this.backAnimate}
+                />
+                <Animated.View
+                  style={[styles.dots, {opacity:dotStretch2}]}
+                  onPress={this.backAnimate}
+                />
+                <Animated.View
+                  style={[styles.dots, {opacity:dotStretch3}]}
+                  onPress={this.backAnimate}
+                />
+              </Animated.View>
+            </TouchableOpacity>
+          
 
           <TouchableOpacity
             onPress = {this.handleSettingPress}
@@ -288,13 +378,10 @@ const styles = StyleSheet.create({
     justifyContent:'space-between',
     marginRight:40
   },
-  musicView:{
+  musicContainer:{
     width:90,
     height:40,
-    borderColor:'#FD4D3A',
-    borderWidth:1,
     borderRadius:100,
-    backgroundColor:'#FD4D3A',
     marginLeft:35,
     marginTop:15,
     justifyContent:'center'
@@ -303,6 +390,27 @@ const styles = StyleSheet.create({
     width:20,
     height:25,
     alignSelf:'center'
+  },
+  musicView: {
+    height: 40,
+    borderColor:'#FD4D3A',
+    borderWidth:1,
+    borderRadius:100,
+    backgroundColor:'#FD4D3A',
+    marginLeft:35,
+    marginTop:15,
+    justifyContent:'center',
+    flexDirection: 'row'
+  },
+  dots: {
+    width: 16,
+    height: 16,
+    backgroundColor:'#FFFFFF',
+    borderRadius:12,
+    alignItems: 'center',
+    marginTop: 11,
+    marginLeft: 8,
+    marginRight: 8
   }
 });
 

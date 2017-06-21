@@ -11,7 +11,8 @@ import {
   Text,
   View,
   TouchableOpacity,
-  WebView
+  WebView,
+  Image
 } from 'react-native';
 
 import Swiper from "react-native-deck-swiper";
@@ -185,7 +186,7 @@ class VideoScreen extends Component {
       // url.map(p => {
       //   arr.push([p]);
       // })
-      arr.push(['No videos'])
+      arr.push([`Oops, we cannot find any ${HomeTime}-minute videos` ])
     }
     // else arr.push(['No videos'])
 
@@ -196,7 +197,7 @@ class VideoScreen extends Component {
           <Swiper
               cards={arr}
               renderCard={(card) => {
-                if(arr[0][0] != 'No videos'){
+                if(arr[0][0] != `Oops, we cannot find any ${HomeTime}-minute videos`){
                   return (
 
                       <View style={styles.card}>
@@ -236,7 +237,6 @@ class VideoScreen extends Component {
               verticalSwipe = {false}
               disableBottomSwipe={true}
               disableTopSwipe={true}
-              
               >
           </Swiper>
 
@@ -248,6 +248,10 @@ class VideoScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  banner:{
+    width:300,
+    height:150
   },
   card: {
     flex: 1,
@@ -293,11 +297,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-  title: {
-    textAlign: 'center',
-    fontSize: 50,
-    backgroundColor: 'transparent'
-  },
+
   bottomText: {
     textAlign: 'center',
     marginTop:'30%',
@@ -305,10 +305,10 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: 'center',
-    fontSize: 40,
-    fontWeight: '600',
+    fontSize: 30,
+    fontWeight: '400',
     backgroundColor: 'transparent',
-    color:'#FD4D3A'
+    color:'#55A52A'
   },
   stuffView:{
     flex:3,

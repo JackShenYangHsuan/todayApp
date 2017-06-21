@@ -3,6 +3,7 @@ package com.todayapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.zmxv.RNSound.RNSoundPackage;
 import im.shimo.react.cookie.CookieManagerPackage;
 import com.inprogress.reactnativeyoutube.ReactNativeYouTube;
 import com.wog.videoplayer.VideoPlayerPackage;
@@ -29,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNSoundPackage(),
             new CookieManagerPackage(),
             new ReactNativeYouTube(),
             new VideoPlayerPackage(),

@@ -17,6 +17,7 @@
     "react-native-keyboard-aware-scroll-view": "^0.2.9",
     "react-native-native-video-player": "^1.3.3",
     "react-native-snap-carousel": "^2.3.0",
+    "react-native-sound": "^0.10.3",
     "react-native-swiper": "^1.5.4",
     "react-navigation": "^1.0.0-beta.9",
     "react-redux": "^5.0.5",
