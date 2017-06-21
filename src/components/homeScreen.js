@@ -27,6 +27,9 @@ import {
 import {connect} from 'react-redux';
 import Swiper from 'react-native-swiper';
 import Carousel from 'react-native-snap-carousel';
+import Animation from 'lottie-react-native';
+import anim from '../icons/heart.json';
+
 import {
   setHomeButtonColor, setHomeTime, listPosts,
   toggleTooltip, setTooltipToggle, setMusicState,
@@ -76,6 +79,10 @@ class HomeScreen extends Component {
     }
 
 
+    setAnim = (anim) => {
+      this.anim = anim;
+    }
+
   handleMyStuffPress = () =>{
     this.props.navigation.navigate('MyStuff')
   }
@@ -86,7 +93,8 @@ class HomeScreen extends Component {
     this.props.navigation.navigate('Article')
   }
   handleCreatePress = () =>{
-    this.props.navigation.navigate('Create')
+    this.props.navigation.navigate('Create');
+
   }
   handleSettingPress = () =>{
     this.props.navigation.navigate('Setting')
@@ -102,6 +110,9 @@ class HomeScreen extends Component {
   };
 
   stretchAnimate = () => {
+
+    this.anim.play();
+
     this.widthValue.setValue(0);
     this.dotValue1.setValue(0);
     this.dotValue2.setValue(0);
@@ -182,6 +193,22 @@ class HomeScreen extends Component {
     return (
       <View style = {styles.container}>
 
+        <View>
+          <Animation
+              ref={this.setAnim}
+              style={{
+                width: 200,
+                height: 200,
+                position:'absolute',
+                backgroundColor:'transparent'
+              }}
+              loop={true}
+              source={anim}
+            />
+        </View>
+
+
+
         <Image style = {styles.arrow} source = {require('../icons/arrow.png')}/>
 
         <View style = {styles.time}>
@@ -261,7 +288,7 @@ class HomeScreen extends Component {
                 />
               </Animated.View>
             </TouchableOpacity>
-          
+
 
           <TouchableOpacity
             onPress = {this.handleSettingPress}

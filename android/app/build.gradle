@@ -133,6 +133,7 @@ android {
 }
 
 dependencies {
+    compile project(':lottie-react-native')
     compile project(':react-native-sound')
     compile project(':react-native-cookie')
     compile project(':react-native-youtube')

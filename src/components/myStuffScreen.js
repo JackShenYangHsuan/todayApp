@@ -18,6 +18,8 @@ import {
 import {connect} from 'react-redux';
 import Swiper from "react-native-deck-swiper";
 import navigationOptions from "react-navigation";
+import Animation from 'lottie-react-native';
+import anim from '../icons/heart.json';
 import {
   listPosts, setMystuffButtonColor, resetTime,
   donePost, setMystuffPostNumber, setHomeTime,
@@ -32,6 +34,7 @@ class MyStuffScreen extends Component {
    super(props);
    this.state = {
      swipedAllCards: false,
+     animate: false
    };
  }
 
@@ -52,40 +55,101 @@ class MyStuffScreen extends Component {
   const { goBack } = this.props.navigation;
   goBack();
 }
-handle_done_button_click(id){
+handle_done_button_click = (id) => {
+
   this.props.dispatch(donePost(id));
-  this.props.dispatch(setHomeTime(0));
+  this.props.dispatch(setHomeTime(15));
   this.props.dispatch(plusMusicStage());
   const { goBack } = this.props.navigation;
-  goBack();
+  this.setState({
+    animate: true
+  })
+  // setTimeout(() => {
+  //     goBack();
+  // }, 10000)
+
 }
 
   componentWillMount() {
         this.props.dispatch(listPosts(0));
+
+  }
+  // componentDidMount(){
+  //   console.log(this.state);
+  //   if(this.state.animate) {
+  //     console.log('playyyyyyyyy');
+  //     setTimeout(() => {
+  //         this.anim.play();
+  //     }, 5000)
+  //   }
+  // }
+  componentDidUpdate(prevProps, prevState) {
+    // only update chart if the data has changed
+    const { goBack } = this.props.navigation;
+    if (prevState.animate !== this.state.animate) {
+      setTimeout(() => {
+          this.anim.play();
+          setTimeout(() => {
+              goBack();
+          }, 2000)
+      }, 100)
+
+    }
+
+
+
   }
 
+  setAnim = (anim) => {
+    this.anim = anim;
+  }
+  play = () => {
+    this.anim.play();
+  }
 
   render() {
     const { goBack } = this.props.navigation;
     const {posts, HomeTime, Mystuff_button_color, post_number} = this.props;
     const arr = [];
-    let count = 10;
-    console.log(this.props)
+
+
     let arrCard = posts.map(p => {
       if(p.time == HomeTime)
-        arr.push([p.text, p.deadline, p.id, count]);
-        count += 10;
+        arr.push([p.text, p.deadline, p.id]);
+
     })
     if(!arr.length) arr.push(['You have done everything!', 'None']);
     console.log(arr);
 
-
-    return (
-      <View style={styles.container}>
-
-      <View style = {styles.light}>
+    if(this.state.animate) return (
+      <View style = {{flex:1}}>
+      <Animation
+          ref={this.setAnim}
+          style={{
+            width: 500,
+            height: 300,
+            position:'absolute',
+            backgroundColor:'transparent',
+            marginLeft:-30,
+            marginTop:70,
+            zIndex:100
+          }}
+          loop={false}
+          source={anim}
+          autoPlay = {true}
+        />
 
       </View>
+
+    )
+    else return (
+      <View style={styles.container}>
+
+
+
+
+
+
       <View style = {styles.swiperContainer}>
       <Swiper
             cards={arr}

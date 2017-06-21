@@ -119,6 +119,7 @@ class LoginScreen extends Component {
               value={this.props.inputValue} // controlled component
               onChangeText={text => this.handlePasswordInputChange(text)}
               returnKeyType = 'done'
+              secureTextEntry = 'true'
             />
           </View>
 
