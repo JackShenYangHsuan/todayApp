@@ -407,7 +407,7 @@ export function createAccount(username, password) {
     return (dispatch, getState) => {
         return createAccountFromApi(username, password).then( newAccount => {
             if(newAccount){
-              dispatch(findAccount(newAccount.id, newAccount.username, newAccount.password));
+              // dispatch(findAccount(newAccount.id, newAccount.username, newAccount.password));
             }else{
               dispatch(account_exist(true));
             }

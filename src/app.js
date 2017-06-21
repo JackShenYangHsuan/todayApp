@@ -23,6 +23,8 @@ import SettingScreen from './components/settingScreen';
 import VideoScreen from './components/videoScreen';
 import VideoGenresScreen from './components/videoGenresScreen';
 import MusicPreferenceScreen from './components/musicPreferenceScreen';
+import LoginScreen from './components/loginScreen';
+import RegisterScreen from './components/registerScreen';
 
 
 
@@ -36,6 +38,8 @@ const AppNavigator = StackNavigator({
     MusicPrefernce: {screen: MusicPreferenceScreen},
     Setting: {screen: SettingScreen},
     Video: {screen: VideoScreen},
+    Login: {screen: LoginScreen},
+    Register: {screen: RegisterScreen},
 
 }, {
     headerMode: 'none'
@@ -73,7 +77,7 @@ const AppWithNavState = connect(state => ({
 }))(AppWithStyleAndNavigator);
 
 // Nav reducer
-const initialState = AppNavigator.router.getStateForAction(NavigationActions.navigate({routeName: 'Home'}));
+const initialState = AppNavigator.router.getStateForAction(NavigationActions.navigate({routeName: 'Login'}));
 const nav = (state = initialState, action) => {
     const nextState = AppNavigator.router.getStateForAction(action, state);
     return nextState || state;

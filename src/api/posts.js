@@ -177,11 +177,17 @@ export function findAccount(id = "", username = "", password = ""){
   }
   console.log(`Making GET request to: ${url}`);
 
-  return fetch(url).then(function(res) {
-      if (res.status !== 200)
-          throw new Error(`Unexpected response code: ${res.status}`);
-      return res.data;
-  });
+  return fetch(url, {
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).then(res => {
+        if (res.status !== 200)
+            throw new Error(`Unexpected response code: ${res.status}`);
+
+        return res.json();
+    });
+
 }
 export function createAccount(username, password){
   let url = `${postBaseUrl}/accounts`;
@@ -189,14 +195,18 @@ export function createAccount(username, password){
 
   return fetch(url, {
     method: 'POST',
-    header: {Accept: 'application/json',
-          'Content-Type': 'application/json'},
-    body: JSON.stringify([username, password])
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({username, password})
   }).then(function(res) {
       if (res.status !== 200)
           throw new Error(`Unexpected response code: ${res.status}`);
 
-      return res.data;
+      return res.json().then((res) => {
+        return res;
+      });
   });
 }
 
