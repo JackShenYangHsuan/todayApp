@@ -48,10 +48,16 @@ class PlaceSettingScreen extends Component {
       {enableHighAccuracy: true}
     );
  }
+ goBack = () => {
+   const { goBack } = this.props.navigation;
+   goBack();
+ }
   render() {
     return (
       <KeyboardAwareScrollView style = {{backgroundColor:'white'}}>
-
+        <TouchableOpacity onPress = {this.goBack}>
+          <Image style = {styles.backBtn} source = {require('../icons/backBtn.png')}/>
+        </TouchableOpacity>
         <View>
           <Text style = {styles.title}>Home & Office</Text>
         </View>
@@ -119,7 +125,13 @@ const styles = StyleSheet.create({
     height:40,
     marginTop:5,
   },
-
+  backBtn:{
+    width:28,
+    height:20,
+    marginTop:40,
+    marginLeft:25,
+    position:'absolute',
+  },
   textInput:{
     height:50,
     marginTop:15,

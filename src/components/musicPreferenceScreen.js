@@ -58,7 +58,10 @@ class MusicPreferences extends Component {
       const { goBack } = this.props.navigation;
       goBack();
   }
-
+  goBack = () => {
+    const { goBack } = this.props.navigation;
+    goBack();
+  }
 
   render() {
 
@@ -89,7 +92,9 @@ class MusicPreferences extends Component {
 
     return (
       <KeyboardAwareScrollView style = {{backgroundColor:'white'}}>
-
+      <TouchableOpacity onPress = {this.goBack}>
+        <Image style = {styles.backBtn} source = {require('../icons/backBtn.png')}/>
+      </TouchableOpacity>
         <View>
           <Text style = {styles.title}>Music Preferences</Text>
         </View>
@@ -131,6 +136,14 @@ const styles = StyleSheet.create({
     width:'100%',
     height:40,
     marginTop:5,
+  },
+  backBtn:{
+    width:28,
+    height:20,
+    marginTop:40,
+    marginLeft:25,
+    position:'absolute',
+
   },
   content:{
     marginTop:70,

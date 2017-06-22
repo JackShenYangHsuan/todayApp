@@ -21,20 +21,20 @@ import {
   Picker,
   Button,
   Animated,
-  Easing
+  Easing,
+  AsyncStorage
 } from 'react-native';
 
 import {connect} from 'react-redux';
 import Swiper from 'react-native-swiper';
 import Carousel from 'react-native-snap-carousel';
-import Animation from 'lottie-react-native';
-import anim from '../icons/heart.json';
+import Sound from 'react-native-sound';
 
 import {
   setHomeButtonColor, setHomeTime, listPosts,
   toggleTooltip, setTooltipToggle, setMusicState,
   createAccountSuccess, set_video_genres_state_from_api,
-  set_music_prefer_state_from_api, getVideo, getArticle
+  set_music_prefer_state_from_api, getVideo, getArticle, set_id_state
 } from '../states/post-actions.js';
 
 const ENTRIES1 = [
@@ -55,6 +55,65 @@ const ENTRIES1 = [
     },
 ];
 
+var teenage1 = new Sound('teenage1.mp3', Sound.MAIN_BUNDLE, (error) => {
+  if (error) {
+    console.log('failed to load teenage1', error);
+    return;
+  }
+  console.log('duration teenage1 in seconds: ' + teenage1.getDuration() + 'number of channels: ' + teenage1.getNumberOfChannels());
+});
+var teenage2 = new Sound('teenage2.mp3', Sound.MAIN_BUNDLE, (error) => {
+  if (error) {
+    console.log('failed to load teenage2', error);
+    return;
+  }
+  console.log('duration teenage2 in seconds: ' + teenage1.getDuration() + 'number of channels: ' + teenage1.getNumberOfChannels());
+});
+var teenage3 = new Sound('teenage3.mp3', Sound.MAIN_BUNDLE, (error) => {
+  if (error) {
+    console.log('failed to load teenage3', error);
+    return;
+  }
+  console.log('duration teenage3 in seconds: ' + teenage1.getDuration() + 'number of channels: ' + teenage1.getNumberOfChannels());
+});
+var folk1 = new Sound('folk1.wav', Sound.MAIN_BUNDLE, (error) => {
+  if (error) {
+    console.log('failed to load folk1', error);
+    return;
+  }
+  console.log('duration folk1 in seconds: ' + teenage1.getDuration() + 'number of channels: ' + teenage1.getNumberOfChannels());
+});
+var folk2 = new Sound('folk2.wav', Sound.MAIN_BUNDLE, (error) => {
+  if (error) {
+    console.log('failed to load folk2', error);
+    return;
+  }
+  console.log('duration folk2 in seconds: ' + teenage1.getDuration() + 'number of channels: ' + teenage1.getNumberOfChannels());
+});
+var softrock1 = new Sound('softrock1.wav', Sound.MAIN_BUNDLE, (error) => {
+  if (error) {
+    console.log('failed to load softrock1', error);
+    return;
+  }
+  console.log('duration softrock1 in seconds: ' + teenage1.getDuration() + 'number of channels: ' + teenage1.getNumberOfChannels());
+});
+var softrock2 = new Sound('softrock2.wav', Sound.MAIN_BUNDLE, (error) => {
+  if (error) {
+    console.log('failed to load softrock2', error);
+    return;
+  }
+  console.log('duration softrock2 in seconds: ' + teenage1.getDuration() + 'number of channels: ' + teenage1.getNumberOfChannels());
+});
+var softrock3 = new Sound('softrock3.wav', Sound.MAIN_BUNDLE, (error) => {
+  if (error) {
+    console.log('failed to load softrock3', error);
+    return;
+  }
+  console.log('duration softrock3 in seconds: ' + teenage1.getDuration() + 'number of channels: ' + teenage1.getNumberOfChannels());
+});
+
+var children;
+
 class HomeScreen extends Component {
 
   constructor(props) {
@@ -68,7 +127,16 @@ class HomeScreen extends Component {
    };
  }
 
- componentWillMount() {
+ componentWillMount = async() => {
+        try{
+           var value = await AsyncStorage.getItem('id');
+           if(value!=null){
+             this.props.dispatch(set_id_state(value));
+           }else{
+           }
+        }catch(error){
+            console.log(error);
+        }
         this.props.dispatch(listPosts(0));
         this.props.dispatch(setHomeTime(15));
         this.props.dispatch(getArticle());
@@ -76,12 +144,7 @@ class HomeScreen extends Component {
         this.props.dispatch(set_video_genres_state_from_api());
         this.props.dispatch(set_music_prefer_state_from_api());
 
-    }
-
-
-    setAnim = (anim) => {
-      this.anim = anim;
-    }
+  }
 
   handleMyStuffPress = () =>{
     this.props.navigation.navigate('MyStuff')
@@ -109,9 +172,28 @@ class HomeScreen extends Component {
     title: 'Welcome',
   };
 
+  renderChildren = (music_stage) => {
+    if(music_stage[0] && !music_stage[1] && !music_stage[2]){
+      return  <View style = {styles.dots}/>
+    }
+    else if(music_stage[0] && music_stage[1] && !music_stage[2]){
+      return (
+        <View>
+        <View style = {styles.dots}/>
+        <View style = {styles.dots}/>
+        </View>
+      )
+    }
+    else return (
+      <View></View>
+    )
+
+
+  }
+
   stretchAnimate = () => {
 
-    this.anim.play();
+
 
     this.widthValue.setValue(0);
     this.dotValue1.setValue(0);
@@ -135,36 +217,54 @@ class HomeScreen extends Component {
       createAnimation(this.dotValue2, 2000, Easing.ease, 600),
       createAnimation(this.dotValue3, 2000, Easing.ease, 800),
     ]).start()
+    softrock1.stop(() => {
+    });
+    softrock2.stop(() => {
+    });
+    softrock3.stop(() => {
+    });
   }
 
-  backAnimate = () => {
-    this.widthValue.setValue(0);
-    this.dotValue1.setValue(0);
-    this.dotValue2.setValue(0);
-    this.dotValue3.setValue(0);
-    isStretched = false;
-    const createAnimation = function (value, duration, easing, delay = 0) {
-      return Animated.timing(
-        value,
-        {
-          toValue: 1,
-          duration,
-          easing,
-          delay
+  playMusic = (music_stage) => {
+    var number = 0;
+    music_stage.map(m => {
+      if(m == true){
+        number += 1;
+      }
+    });
+
+    if(number == 1){
+      softrock1.play((success) => {
+        if (success) {
+          console.log('successfully finished playing');
+        } else {
+          console.log('playback failed due to audio decoding errors');
         }
-      )
-    };
-    Animated.parallel([
-      createAnimation(this.dotValue1, 2000, Easing.ease, 0),
-      createAnimation(this.dotValue2, 2000, Easing.ease, 200),
-      createAnimation(this.dotValue3, 2000, Easing.ease, 400),
-      createAnimation(this.widthValue, 250, Easing.easeInElastic, 800),
-    ]).start()
+      });
+    }
+    if(number == 2){
+      softrock2.play((success) => {
+        if (success) {
+          console.log('successfully finished playing');
+        } else {
+          console.log('playback failed due to audio decoding errors');
+        }
+      });
+    }
+    if(number == 3){
+      softrock3.play((success) => {
+        if (success) {
+          console.log('successfully finished playing');
+        } else {
+          console.log('playback failed due to audio decoding errors');
+        }
+      });
+    }
+
   }
-
-
-
+// {this.renderChildren(music_stage)}
   render() {
+    const {music_stage} = this.props;
     const widthStretch = this.widthValue.interpolate({
       inputRange: [0, 1],
       outputRange: [90, 150]
@@ -188,26 +288,20 @@ class HomeScreen extends Component {
                 </View>
             );
         });
-
-
+    var dot1 = '#AA3A3A';
+    var dot2 = '#AA3A3A';
+    var dot3 = '#AA3A3A';
+    if(music_stage[0]){
+      dot1 = 'white';
+    }
+    if(music_stage[1]){
+      dot2 = 'white';
+    }
+    if(music_stage[2]){
+      dot3 = 'white';
+    }
     return (
       <View style = {styles.container}>
-
-        <View>
-          <Animation
-              ref={this.setAnim}
-              style={{
-                width: 200,
-                height: 200,
-                position:'absolute',
-                backgroundColor:'transparent'
-              }}
-              loop={true}
-              source={anim}
-            />
-        </View>
-
-
 
         <Image style = {styles.arrow} source = {require('../icons/arrow.png')}/>
 
@@ -270,21 +364,28 @@ class HomeScreen extends Component {
           </TouchableOpacity>
 
 
-            <TouchableOpacity onPress={this.stretchAnimate}>
+            <TouchableOpacity
+              onPress={this.stretchAnimate}
+              onLongPress={() => this.playMusic(music_stage)}
+            >
+
+
+
+
+
+
+
               <Animated.View
                 style={[styles.musicView, {width:widthStretch}]}
               >
                 <Animated.View
-                  style={[styles.dots, {opacity:dotStretch1}]}
-                  onPress={this.backAnimate}
+                  style={[styles.unable_dots, {opacity:dotStretch1}, {backgroundColor:`${dot1}`}]}
                 />
                 <Animated.View
-                  style={[styles.dots, {opacity:dotStretch2}]}
-                  onPress={this.backAnimate}
+                  style={[styles.unable_dots, {opacity:dotStretch2}, {backgroundColor:`${dot2}`}]}
                 />
                 <Animated.View
-                  style={[styles.dots, {opacity:dotStretch3}]}
-                  onPress={this.backAnimate}
+                  style={[styles.unable_dots, {opacity:dotStretch3}, {backgroundColor:`${dot3}`}]}
                 />
               </Animated.View>
             </TouchableOpacity>
@@ -429,15 +530,27 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     flexDirection: 'row'
   },
-  dots: {
+  unable_dots: {
     width: 16,
     height: 16,
-    backgroundColor:'#FFFFFF',
+    // backgroundColor:'#AA3A3A',
     borderRadius:12,
     alignItems: 'center',
     marginTop: 11,
     marginLeft: 8,
     marginRight: 8
+  },
+  dots: {
+    width: 16,
+    height: 16,
+    // backgroundColor:'blue',
+    borderRadius:12,
+    alignItems: 'center',
+    marginTop: 26,
+    marginLeft: 70,
+    marginRight: 8,
+    position:'absolute',
+    zIndex:100
   }
 });
 
@@ -448,6 +561,7 @@ export default connect((state) => {
       ...state.Music,
       ...state.Registor,
       ...state.Video_genres,
-      ...state.Music_prefer
+      ...state.Music_prefer,
+      ...state.nav
     };
 })(HomeScreen);

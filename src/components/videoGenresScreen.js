@@ -63,6 +63,11 @@ class VideoGenresScreen extends Component {
       const { goBack } = this.props.navigation;
       goBack();
   }
+  goBack = () => {
+    const { goBack } = this.props.navigation;
+    goBack();
+  }
+
 
 
   render() {
@@ -94,7 +99,9 @@ class VideoGenresScreen extends Component {
 
     return (
       <KeyboardAwareScrollView style = {{backgroundColor:'white'}}>
-
+      <TouchableOpacity onPress = {this.goBack}>
+        <Image style = {styles.backBtn} source = {require('../icons/backBtn.png')}/>
+      </TouchableOpacity>
         <View>
           <Text style = {styles.title}>Video Genres</Text>
         </View>
@@ -118,9 +125,9 @@ class VideoGenresScreen extends Component {
 
         </View>
 
-        <View style = {styles.content}>
+        <ScrollView style = {styles.content}>
             {children}
-        </View>
+        </ScrollView>
 
 
         <View style = {styles.doneView}>
@@ -145,13 +152,21 @@ const styles = StyleSheet.create({
     marginTop:35,
     marginBottom:10
   },
+  backBtn:{
+    width:28,
+    height:20,
+    marginTop:40,
+    marginLeft:25,
+    position:'absolute',
+
+  },
   inputView:{
     width:'100%',
     height:40,
     marginTop:5,
   },
   content:{
-    marginTop:70,
+    marginTop:30,
     marginLeft:20
   },
   enableText:{

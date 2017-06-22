@@ -394,14 +394,6 @@ const initVideoSettingState = {
     {
       topic: "National Geographic",
       able: false
-    },
-    {
-      topic: "Material Design",
-      able: false
-    },
-    {
-      topic: "WIRED",
-      able: false
     }
   ],
   videoSearch: ''

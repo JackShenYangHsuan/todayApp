@@ -86,6 +86,10 @@ handle_create = () => {
       this.props.dispatch(createPost(this.props.place, this.props.deadline, this.props.estimate_time, this.props.inputValue, this.props.has_deadline, '1'));
       this.props.dispatch(resetCreate());
 }
+goBack = () => {
+  const { goBack } = this.props.navigation;
+  goBack();
+}
 
 
   render() {
@@ -93,6 +97,9 @@ handle_create = () => {
     console.log(estimate_button_color);
     return (
       <ScrollView style = {{backgroundColor:'white'}}>
+        <TouchableOpacity onPress = {this.goBack}>
+          <Image style = {styles.backBtn} source = {require('../icons/backBtn.png')}/>
+        </TouchableOpacity>
         <Text style = {styles.title}>Create an Event</Text>
         <View style = {styles.inputView}>
           <TextInput
@@ -223,6 +230,14 @@ const styles = StyleSheet.create({
     color:'#244048',
     alignSelf:'center',
     marginTop:35,
+
+  },
+  backBtn:{
+    width:28,
+    height:20,
+    marginTop:40,
+    marginLeft:25,
+    position:'absolute',
 
   },
   inputView:{

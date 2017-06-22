@@ -3,14 +3,10 @@ package com.todayapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.airbnb.android.react.lottie.LottiePackage;
 import com.zmxv.RNSound.RNSoundPackage;
-import im.shimo.react.cookie.CookieManagerPackage;
-import com.inprogress.reactnativeyoutube.ReactNativeYouTube;
 import com.wog.videoplayer.VideoPlayerPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
-import com.remobile.video.RCTVideoPackage;
-import com.brentvatne.react.ReactVideoPackage;
+import im.shimo.react.cookie.CookieManagerPackage;
+import com.airbnb.android.react.lottie.LottiePackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -31,14 +27,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new LottiePackage(),
             new RNSoundPackage(),
-            new CookieManagerPackage(),
-            new ReactNativeYouTube(),
             new VideoPlayerPackage(),
-            new VectorIconsPackage(),
-            new RCTVideoPackage(),
-            new ReactVideoPackage()
+            new CookieManagerPackage(),
+            new LottiePackage()
       );
     }
   };

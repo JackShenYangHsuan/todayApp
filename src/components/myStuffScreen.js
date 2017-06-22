@@ -19,7 +19,8 @@ import {connect} from 'react-redux';
 import Swiper from "react-native-deck-swiper";
 import navigationOptions from "react-navigation";
 import Animation from 'lottie-react-native';
-import anim from '../icons/heart.json';
+import anim1 from '../icons/heart.json';
+import anim from '../icons/fire.json';
 import {
   listPosts, setMystuffButtonColor, resetTime,
   donePost, setMystuffPostNumber, setHomeTime,
@@ -89,19 +90,24 @@ handle_done_button_click = (id) => {
     if (prevState.animate !== this.state.animate) {
       setTimeout(() => {
           this.anim.play();
+          this.anim1.play();
           setTimeout(() => {
               goBack();
-          }, 2000)
+          }, 3000)
       }, 100)
 
     }
-
-
-
+  }
+  goBack = () => {
+    const { goBack } = this.props.navigation;
+    goBack();
   }
 
   setAnim = (anim) => {
     this.anim = anim;
+  }
+  setAnim1 = (anim1) => {
+    this.anim1 = anim1;
   }
   play = () => {
     this.anim.play();
@@ -123,8 +129,9 @@ handle_done_button_click = (id) => {
 
     if(this.state.animate) return (
       <View style = {{flex:1}}>
+
       <Animation
-          ref={this.setAnim}
+          ref={this.setAnim1}
           style={{
             width: 500,
             height: 300,
@@ -135,19 +142,41 @@ handle_done_button_click = (id) => {
             zIndex:100
           }}
           loop={false}
+          source={anim1}
+          autoPlay = {true}
+        />
+
+      <Animation
+          ref={this.setAnim}
+          style={{
+            width: 375,
+            height: 677,
+            position:'absolute',
+            backgroundColor:'transparent',
+            marginLeft:0,
+            marginTop:0,
+            zIndex:100
+          }}
+          loop={false}
           source={anim}
           autoPlay = {true}
         />
 
-      </View>
 
-    )
+        </View>
+
+      )
+
+
+
+
     else return (
       <View style={styles.container}>
-
-
-
-
+      <View>
+        <TouchableOpacity onPress = {this.goBack}>
+          <Image style = {styles.backBtn} source = {require('../icons/backBtn.png')}/>
+        </TouchableOpacity>
+      </View>
 
 
       <View style = {styles.swiperContainer}>
@@ -274,6 +303,15 @@ const styles = StyleSheet.create({
   //   zIndex:100,
   //   alignSelf:'center'
   // },
+  backBtn:{
+    width:28,
+    height:20,
+    marginTop:40,
+    marginLeft:25,
+    position:'absolute',
+    zIndex:100,
+    backgroundColor:'red'
+  },
   card: {
     flex: 1,
     borderRadius: 10,

@@ -15,7 +15,8 @@ import {
   ScrollView,
   TextInput,
   Switch,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  AlertIOS
 } from 'react-native';
 
 import {connect} from 'react-redux';
@@ -64,19 +65,8 @@ handle_registor_click(username, password){
  this.props.dispatch(createAccountSuccess(true));
  this.props.dispatch(findAccount("", username, password));
  setTimeout(() => {
-     // AsyncStorage.getItem('ids', (res) => {
-     //   console.log(res);
-     // });
-     const {id} = this.props;
-     if(id) {
-       this.props.navigation.navigate('Home');
-     }
-     else {
-       AlertIOS.alert(
-         'You are dead wrong'
-       );
-     }
- }, 500)
+      this.props.navigation.navigate('Home');
+ }, 1000)
 }
 
 

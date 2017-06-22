@@ -49,7 +49,7 @@ class LoginScreen extends Component {
           }catch(error){
               console.log(error);
           }
-    }
+    }     
 
 
     handleUserInputChange(text) {
@@ -98,6 +98,9 @@ class LoginScreen extends Component {
       }, 500)
     }
 
+    handleRegisterPress = () =>{
+     this.props.navigation.navigate('Register');
+   }
 
 
   render() {
@@ -154,7 +157,7 @@ class LoginScreen extends Component {
 
         <View style = {styles.doneView}>
           <TouchableOpacity
-            onPress = {this.props.navigation.navigate('Registor')}
+            onPress = {this.handleRegisterPress}
             style = {styles.doneRec}>
             <Text style = {styles.doneText}>Create an account</Text>
           </TouchableOpacity>

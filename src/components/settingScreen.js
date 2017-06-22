@@ -15,7 +15,8 @@ import {
   Image,
   ScrollView,
   TextInput,
-  Switch
+  Switch,
+  AsyncStorage
 } from 'react-native';
 
 import Swiper from "react-native-deck-swiper";
@@ -40,13 +41,26 @@ class SettingScreen extends Component {
  handleMusicPreferencePress = () =>{
    this.props.navigation.navigate('MusicPrefernce')
  }
-
-
+ goBack = () => {
+   const { goBack } = this.props.navigation;
+   goBack();
+ }
+ handleLogout = async () =>{
+   try{
+      await AsyncStorage.removeItem('id');
+   }catch(error){
+       console.log(error);
+   }
+   this.props.navigation.navigate('Login');
+   
+ }
 
   render() {
     return (
       <View style = {styles.container}>
-
+      <TouchableOpacity onPress = {this.goBack}>
+        <Image style = {styles.backBtn} source = {require('../icons/backBtn.png')}/>
+      </TouchableOpacity>
         <View style = {styles.welcomeView}>
           <Text style = {styles.titleWelcome}>Welcome,</Text>
           <Text style = {styles.titleName}>Jack</Text>
@@ -82,7 +96,9 @@ class SettingScreen extends Component {
         </View>
 
         <View style = {styles.footerView}>
-            <TouchableOpacity style = {styles.logoutView}>
+            <TouchableOpacity
+            onPress = {this.handleLogout}
+            style = {styles.logoutView}>
               <Text style = {styles.logoutText}>Logout</Text>
             </TouchableOpacity>
         </View>
@@ -98,6 +114,14 @@ const styles = StyleSheet.create({
     display:'flex',
     backgroundColor:'white'
   },
+  backBtn:{
+    width:28,
+    height:20,
+    marginTop:40,
+    marginLeft:25,
+    position:'absolute',
+
+  },
   titleWelcome:{
     fontSize:20,
     fontWeight:'300',
@@ -112,8 +136,8 @@ const styles = StyleSheet.create({
     marginLeft:30,
   },
   welcomeView:{
+    marginTop:50,
     flex:2,
-
   },
   listView:{
     flex:3,
